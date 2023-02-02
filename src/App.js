@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Basket from "./pages/Basket";
 import Profile from "./pages/Profile";
 import SingleBranch from "./pages/SingleBranch";
+import AddCard from "./pages/AddCard";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/profile" element={<Profile/>}/>
+                <Route path="/profile/add-card" element={<AddCard/>}/>
                 <Route path="/basket" element={<Basket/>}/>
                 <Route path="/branch/:id" element={<SingleBranch/>}/>
                 <Route path="/menu/:slugName" element={<Menu/>}/>

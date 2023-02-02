@@ -5,7 +5,6 @@
   & .container{
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
   }
 
   &__title {
@@ -22,6 +21,7 @@
     border-radius: 1rem;
     padding: 2rem;
     background-color: $white;
+    margin-bottom: 2rem;
 
     &__row {
       width: 100%;
@@ -88,6 +88,48 @@
           height: 100% !important;
         }
       }
+    }
+  }
+
+  &__add__card{
+    width: 25rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .4s;
+    background-color: $white;
+    border: .1rem solid $white;
+
+    &:hover{
+      border: .1rem solid $blue;
+      background-color: unset;
+    }
+
+    &__plus{
+      font-family: 'Raleway', sans-serif;
+      font-size: 2rem;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: .1rem solid $blue;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      color: $blue;
+      transition: all .4s;
+    }
+
+    &__text{
+      color: $blue;
+      font-family: 'Raleway', sans-serif;
+      font-size: 2rem;
+      transition: all .4s;
     }
   }
 }

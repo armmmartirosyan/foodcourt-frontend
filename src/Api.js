@@ -29,6 +29,10 @@ class Api {
         return api.put(`/users/current`, {...params});
     }
 
+    static setupIntent(){
+        return api.post(`/payment/setup-intent`);
+    }
+
     //basket
     static getBasket() {
         return api.get(`/basket`);

@@ -8,7 +8,7 @@ import Helper from "../helpers/Helper";
 import AccountTableRow from "../components/AccountTableRow";
 import AccountModifyForm from "../components/AccountModifyForm";
 import Account from "../helpers/Account";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Profile() {
     const navigate = useNavigate();
@@ -139,6 +139,10 @@ function Profile() {
                                                 ))
                                             }
                                         </div>
+                                        <Link to='/profile/add-card' className="account__add__card">
+                                            <p className="account__add__card__plus">+</p>
+                                            <p className="account__add__card__text">Add card</p>
+                                        </Link>
                                         <button
                                             className="login__form__submit btn__bg"
                                             onClick={handleLogout}
