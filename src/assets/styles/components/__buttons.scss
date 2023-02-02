@@ -1,0 +1,35 @@
+.btn__bg{
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  color: $blue;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  padding: 1.3rem 2.5rem;
+  background-color: $lightOrange;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: all .4s;
+
+  &:hover, &.active {
+    color: $lightOrange;
+    background-color: $blue;
+  }
+}
+.btn__border{
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  color: $white;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  padding: 1.3rem 2.5rem;
+  background-color: $blue;
+  border: .1rem solid $lightOrange;
+  outline: 0;
+  cursor: pointer;
+  transition: all .4s;
+
+  &:hover, &.active {
+    color: $lightOrange;
+  }
+}

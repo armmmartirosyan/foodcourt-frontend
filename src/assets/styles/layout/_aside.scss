@@ -1,0 +1,41 @@
+.aside {
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  border: .1rem solid $grey;
+  background-color: $white;
+  height: fit-content;
+
+  &__list {
+    list-style-type: none;
+  }
+
+  &__item {
+    width: 100%;
+    border-top: .1rem solid $grey;
+
+    &:nth-child(1) {
+      border-top: 0;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $lightOrange;
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    font-weight: 500;
+    font-family: "Raleway", sans-serif;
+    transition: all .4s;
+    display: block;
+    padding: 1rem;
+
+    &.active{
+      color: $blue;
+    }
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}

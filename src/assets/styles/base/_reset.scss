@@ -1,0 +1,105 @@
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0)
+  }
+  100% {
+    transform: rotateZ(360deg)
+  }
+}
+
+/* Chrome, Safari, Edge, Opera - hide number input arrow */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox - hide number input arrow */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.PhoneInput {
+  &Country {
+    &SelectArrow {
+      display: none !important;
+    }
+
+    &Icon--border {
+      background-color: unset !important;
+      box-shadow: unset !important;
+    }
+  }
+}
+
+html {
+  font-size: calc(100vw / (1600 / 10));
+}
+
+body {
+  background-color: $grey;
+  font-size: 1.4rem;
+  color: $black;
+  font-family: $defaultFont;
+}
+
+.wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-top: 6.2rem;
+}
+
+.container {
+  width: 94rem;
+  margin: 0 auto;
+}
+
+.clear {
+  clear: both;
+}
+
+.loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  background-color: $greyTransparent;
+
+  &__spinner {
+    width: 3rem;
+    height: 3rem;
+    background-color: inherit;
+    border-width: .3rem .3rem .3rem .3rem;
+    border-radius: 50%;
+    border-color: $lightOrange $lightOrange $lightOrange $greyTransparent;
+    border-style: solid;
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+}
+
+.pages {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__numbers {
+    margin: .5rem;
+  }
+}

@@ -1,0 +1,50 @@
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: $blue;
+
+  & .container {
+    border-bottom: .1rem solid $blue;
+    padding: 1.6rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    font-size: 2rem;
+    color: $lightOrange;
+    font-weight: 400;
+    font-family: "Yesteryear", sans-serif;
+    margin-left: 3rem;
+    text-decoration: none;
+    transition: all .4s;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__nav {
+    &__item {
+      font-size: 1.5rem;
+      color: $lightOrange;
+      font-weight: 400;
+      font-family: inherit;
+      margin-left: 3rem;
+      text-decoration: none;
+      transition: all .4s;
+
+      &:hover, &.active {
+        color: $white;
+      }
+
+      &:nth-child(1) {
+        margin-left: 0;
+      }
+    }
+  }
+}
