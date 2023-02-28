@@ -29,8 +29,28 @@ class Api {
         return api.put(`/users/current`, {...params});
     }
 
-    static setupIntent(){
+    static deleteProfile() {
+        return api.delete(`/users/current`);
+    }
+
+    static getKey(email) {
+        return api.post(`/users/forget-pass`, {email});
+    }
+
+    static changePassword(params) {
+        return api.post(`/users/change-pass`, {...params});
+    }
+
+    static setupIntent() {
         return api.post(`/payment/setup-intent`);
+    }
+
+    static publicKey() {
+        return api.get(`/payment/public-key`);
+    }
+
+    static activateAccount(email, token) {
+        return api.get(`/users/confirm?email=${email}&token=${token}`);
     }
 
     //basket
@@ -77,6 +97,20 @@ class Api {
     //offers
     static getOffers() {
         return api.get(`/offers/get`);
+    }
+
+    //payment types
+    static getAllPaymentTypes() {
+        return api.get(`/payment-types`);
+    }
+
+    //orders
+    static addOrder(params) {
+        return api.post(`/orders`, {...params});
+    }
+
+    static getActualOrders() {
+        return api.get(`/orders/user/not-received`);
     }
 }
 

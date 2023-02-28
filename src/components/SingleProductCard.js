@@ -23,12 +23,14 @@ function SingleProductCard(props) {
                         {product.description}
                     </p>
                     <p className="single__card__price">
-                        {`${product.price}RUR`}
+                        {`${product.price}AMD`}
                     </p>
                 </div>
                 <QuantityControl
                     productId={product.id}
                     price={product.price}
+                    allowAdd={true}
+                    isRow={true}
                 />
             </div>
         </article>

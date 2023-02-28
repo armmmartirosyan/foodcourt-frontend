@@ -7,15 +7,23 @@ import {toast} from "react-toastify";
 import _ from "lodash";
 import Helper from "../helpers/Helper";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 function QuantityControl(props) {
-    const {productId, price} = props;
+    const {
+        productId,
+        price,
+        allowAdd = false,
+        isRow = false,
+        handleChangeProductQuantity,
+        quantityFromOut,
+    } = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
 
     const handleChangeQuantity = useCallback((num) => {
-        if (num >= 1) setQuantity(num);
+        if (num > 0 && num < 50) setQuantity(num);
     }, []);
 
     const handleAddToBasket = useCallback(async () => {
@@ -31,18 +39,19 @@ function QuantityControl(props) {
             return;
         }
 
-        console.log('added');
+        toast.success('Product successfully added to basket.');
     }, [productId, quantity]);
 
     return (
-        <div className="products__card__control">
+        <div className={classNames('products__card__control', {row: isRow})}>
             <div className="products__card__quantity">
                 <p className="products__card__quantity__text">Quantity</p>
                 <div className="products__card__quantity__container">
                     <button
                         className="products__card__quantity__control"
                         onClick={() => {
-                            handleChangeQuantity(quantity - 1);
+                            handleChangeProductQuantity ?
+                                handleChangeProductQuantity(quantityFromOut - 1, productId) : handleChangeQuantity(quantity - 1);
                         }}
                     >
                         -
@@ -50,15 +59,14 @@ function QuantityControl(props) {
                     <input
                         type="number"
                         className="products__card__quantity__input"
-                        value={quantity}
-                        onChange={(e) => {
-                            handleChangeQuantity(e.target.value);
-                        }}
+                        value={quantityFromOut || quantity}
+                        disabled
                     />
                     <button
                         className="products__card__quantity__control"
                         onClick={() => {
-                            handleChangeQuantity(quantity + 1);
+                            handleChangeProductQuantity ?
+                                handleChangeProductQuantity(quantityFromOut + 1, productId) : handleChangeQuantity(quantity + 1);
                         }}
                     >
                         +
@@ -66,14 +74,18 @@ function QuantityControl(props) {
                 </div>
             </div>
             <p className="products__card__total">
-                Total price - <span className='products__card__total__price'>{`${+price * +quantity}RUR`}</span>
+                Total price <span className='products__card__total__price'>{`${+price * (+quantityFromOut || +quantity)}AMD`}</span>
             </p>
-            <button
-                className="products__card__add btn__bg"
-                onClick={handleAddToBasket}
-            >
-                Add
-            </button>
+            {
+                allowAdd ? (
+                    <button
+                        className="products__card__add btn__bg"
+                        onClick={handleAddToBasket}
+                    >
+                        Add
+                    </button>
+                ) : null
+            }
         </div>
     );
 }
@@ -81,6 +93,10 @@ function QuantityControl(props) {
 QuantityControl.propTypes = {
     productId: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
+    isRow: PropTypes.bool,
+    allowAdd: PropTypes.bool,
+    quantityFromOut: PropTypes.number,
+    handleChangeProductQuantity: PropTypes.func,
 }
 
 export default QuantityControl;

@@ -2,6 +2,11 @@
   width: 100%;
   padding: 2rem;
 
+  &__actual{
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
   & .container {
     display: flex;
     flex-wrap: wrap;
@@ -19,9 +24,23 @@
     margin-bottom: 2rem;
     position: relative;
 
+    &__title{
+      color: $lightOrange;
+      font-size: 1.8rem;
+      line-height: 1.6rem;
+      font-weight: 500;
+      font-family: "Raleway", sans-serif;
+      margin-bottom: 1rem;
+    }
+
     &__fig {
       width: 20rem;
       height: 15rem;
+    }
+
+    &__box{
+      width: calc(100% - 20rem);
+      height: 100%;
     }
 
     &__img {
@@ -64,12 +83,78 @@
     }
   }
 
-  &__total{
-    font-size: 5.6rem;
-    color: $lightOrange;
+  &__total {
+    font-size: 4rem;
+    color: $blue;
     font-weight: 400;
     font-family: "Raleway", sans-serif;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     text-align: center;
+  }
+}
+
+.payment {
+  width: 100%;
+
+  & .container {
+    background-color: $white;
+    border-radius: .5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__form {
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  &__address {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.7rem;
+    color: $blue;
+    outline: 0;
+    margin-bottom: 1rem;
+    border: .1rem solid $grey;
+    border-radius: .2rem;
+
+    &::placeholder {
+      font-size: 1.7rem;
+      color: $grey;
+    }
+  }
+
+  &__notes {
+    width: 100%;
+    height: 10rem;
+    resize: none;
+    font-size: 1.7rem;
+    color: $blue;
+    outline: 0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: .1rem solid $grey;
+    border-radius: .2rem;
+
+    &::placeholder {
+      font-size: 1.7rem;
+      color: $grey;
+    }
+  }
+
+  &__types {
+    width: 100%;
+    font-size: 1.7rem;
+    color: $blue;
+    margin-bottom: 1rem;
+
+    &::placeholder {
+      font-size: 1.7rem;
+      color: $grey;
+    }
   }
 }

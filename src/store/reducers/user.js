@@ -20,4 +20,7 @@ export default createReducer(initialState, (builder) => {
         .addMatcher((action) => action.type.endsWith('user/get/current/fulfilled'), (state, action) => {
             state.user = action?.payload?.user;
         })
+        .addMatcher((action) => action.type.endsWith('user/modify/fulfilled'), (state, action) => {
+            state.user = action?.payload?.updatedAccount;
+        })
 })

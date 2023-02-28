@@ -35,7 +35,7 @@ function YandexMap(props) {
                 width="100%"
                 height="100%"
                 state={{
-                    center: !_.isEmpty(branchesList) ? center : [55.758544, 37.639774],
+                    center: !_.isEmpty(branchesList) ? center : [40.234325, 44.497457],
                     zoom: 12,
                 }}
             >

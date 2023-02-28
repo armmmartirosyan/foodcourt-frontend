@@ -77,6 +77,7 @@ function Register() {
             return;
         }
 
+        toast.success(`User ${values.firstName} ${values.lastName} registered successfully.`);
         navigate('/login');
     }, [values]);
 

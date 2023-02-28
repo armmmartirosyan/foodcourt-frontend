@@ -70,6 +70,16 @@
       align-items: center;
     }
 
+    &__btn__wrap{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__submit, &__del{
+      margin: 2rem;
+    }
+
     .PhoneInput {
       &Input {
         width: 50%;

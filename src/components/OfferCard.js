@@ -19,7 +19,7 @@ function OfferCard(props) {
                 </figure>
                 <div className="offers__card__box">
                     <h1 className="offers__card__title">{offer.title}</h1>
-                    <p className="offers__card__price">{`${offer.price}RUR`}</p>
+                    <p className="offers__card__price">{`${offer.price}AMD`}</p>
                 </div>
             </Link>
         </article>

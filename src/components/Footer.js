@@ -7,7 +7,7 @@ function Footer() {
     return (
         <footer className="footer">
             <div className="container">
-                <h3 className="footer__title">
+                {/*<h3 className="footer__title">
                     Feel free to check our social media pages
                 </h3>
                 <div className="footer__social">
@@ -23,9 +23,9 @@ function Footer() {
                     <Link to='/'  className="footer__social__item">
                         <FontAwesomeIcon icon={faYoutube} className="footer__social__icon"/>
                     </Link>
-                </div>
+                </div>*/}
                 <p className="footer__copy">
-                    &copy; 2017 - Fesco All Right Reserved
+                    &copy; 2023 - All Right Reserved
                 </p>
             </div>
         </footer>

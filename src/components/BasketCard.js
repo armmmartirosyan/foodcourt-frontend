@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import QuantityControl from "./QuantityControl";
 
 const {REACT_APP_API_URL} = process.env;
 
 function BasketCard(props) {
-    const {item, handleRemove} = props;
+    const {item, handleRemove, handleChangeProductQuantity} = props;
 
     return (
         <article className="basket__card">
@@ -17,9 +18,13 @@ function BasketCard(props) {
             </figure>
             <div className="basket__card__box">
                 <h1 className="basket__card__title">{item.product.title}</h1>
-                <p className="basket__card__price">
-                    {`${item.quantity} x ${item.product.price}RUR`}
-                </p>
+                <QuantityControl
+                    productId={item.product.id}
+                    price={item.product.price}
+                    quantityFromOut={item.quantity}
+                    handleChangeProductQuantity={handleChangeProductQuantity}
+                    allowAdd={false}
+                />
             </div>
             <button
                 className="basket__card__del"
@@ -36,6 +41,7 @@ function BasketCard(props) {
 BasketCard.propTypes = {
     item: PropTypes.object.isRequired,
     handleRemove: PropTypes.func.isRequired,
+    handleChangeProductQuantity: PropTypes.func.isRequired,
 }
 
 export default BasketCard;

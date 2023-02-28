@@ -1,23 +1,31 @@
 import React from 'react';
 import _ from "lodash";
 import PhoneInput from "react-phone-number-input";
-import ru from 'react-phone-number-input/locale/ru'
+import en from 'react-phone-number-input/locale/en'
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 function Form(props) {
-    const {handleChangeValues, values, drawData, handleSubmit} = props;
+    const {handleChangeValues, values, drawData, handleSubmit, handleBack} = props;
     const exclude = [
         'remember',
+        'back',
         'submit',
         'phoneNum',
     ];
 
     return (
-        <form className="login__form">
+        <form className='login__form'>
             {
                 !_.isEmpty(drawData) && !_.isEmpty(values) ? (
                     drawData.map(temp => (
-                        <div className="login__form__box" key={temp.path}>
+                        <div
+                            key={temp.path}
+                            className={classNames(
+                                'login__form__box',
+                                {fit__content: temp.path === 'back' || temp.path === 'submit'}
+                            )}
+                        >
                             {
                                 !exclude.includes(temp.path) ? (
                                     <>
@@ -58,6 +66,17 @@ function Form(props) {
                                                 handleChangeValues(temp.path, !values[temp.path])
                                             }}
                                         />
+                                        <label className="login__form__checkbox__visual" htmlFor={temp.path}>
+                                            <span className="login__form__checkbox__visual__first"></span>
+                                            <span className="login__form__checkbox__visual__second"></span>
+                                        </label>
+                                        {/*<div className="login__form__box">*/}
+                                        {/*    <input type="checkbox" className="login__form__check" id="login-check">*/}
+                                        {/*        <label className="login__form__check__visual" htmlFor="login-check">*/}
+                                        {/*            <span className="login__form__check__visual__first"></span>*/}
+                                        {/*            <span className="login__form__check__visual__second"></span>*/}
+                                        {/*        </label>*/}
+                                        {/*</div>*/}
                                     </>
                                 ) : null
                             }
@@ -73,8 +92,8 @@ function Form(props) {
                                         <PhoneInput
                                             className='login__form__phone'
                                             international
-                                            defaultCountry="RU"
-                                            labels={ru}
+                                            defaultCountry="AM"
+                                            labels={en}
                                             id={temp.path}
                                             value={values[temp.path]}
                                             onChange={(num) => {
@@ -82,6 +101,17 @@ function Form(props) {
                                             }}
                                         />
                                     </>
+                                ) : null
+                            }
+                            {
+                                temp.path === 'back' ? (
+                                    <button
+                                        className="login__form__submit btn__danger"
+                                        onClick={handleBack}
+                                        key={temp.path}
+                                    >
+                                        {temp.label}
+                                    </button>
                                 ) : null
                             }
                             {

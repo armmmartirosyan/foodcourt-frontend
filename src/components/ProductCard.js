@@ -24,13 +24,14 @@ function ProductCard(props) {
                         {product.description}
                     </p>
                     <p className="products__card__price">
-                        {`${product.price}RUR`}
+                        {`${product.price}AMD`}
                     </p>
                 </div>
             </Link>
             <QuantityControl
                 productId={product.id}
                 price={product.price}
+                allowAdd={true}
             />
         </article>
     );

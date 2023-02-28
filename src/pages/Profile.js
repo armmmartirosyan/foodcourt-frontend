@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Wrapper from "../components/Wrapper";
 import {useDispatch, useSelector} from "react-redux";
 import _ from 'lodash';
-import {getCurrentAccountRequest, modifyProfileRequest} from "../store/actions/user";
+import {deleteProfileRequest, getCurrentAccountRequest, modifyProfileRequest} from "../store/actions/user";
 import {toast} from "react-toastify";
 import Helper from "../helpers/Helper";
 import AccountTableRow from "../components/AccountTableRow";
@@ -64,7 +64,13 @@ function Profile() {
             return;
         }
 
-        await dispatch(getCurrentAccountRequest());
+        if (value.name === 'Email') {
+            Account.deleteToken();
+            navigate('/login');
+            toast.info('Activate your account from new email and login again');
+            return;
+        }
+
         setValue({
             key: '',
             value: '',
@@ -86,6 +92,20 @@ function Profile() {
 
         Account.deleteToken();
         navigate('/');
+        window.location.reload();
+    }, []);
+
+    const handelDelAccount = useCallback(async () => {
+        const data = await dispatch(deleteProfileRequest());
+
+        if (!_.isEmpty(data.payload) && (data.payload?.status === 'error' || data.payload?.status !== 'ok')) {
+            toast.error(_.capitalize(Helper.clearAxiosError(data.payload?.message)));
+            return;
+        }
+
+        Account.deleteToken();
+        navigate('/');
+        window.location.reload();
     }, []);
 
     const drawData = [
@@ -139,16 +159,32 @@ function Profile() {
                                                 ))
                                             }
                                         </div>
-                                        <Link to='/profile/add-card' className="account__add__card">
-                                            <p className="account__add__card__plus">+</p>
-                                            <p className="account__add__card__text">Add card</p>
-                                        </Link>
-                                        <button
-                                            className="login__form__submit btn__bg"
-                                            onClick={handleLogout}
-                                        >
-                                            Log Out
-                                        </button>
+                                        {/*<Link to='/profile/add-card' className="account__add__card">*/}
+                                        {/*    <p className="account__add__card__plus">+</p>*/}
+                                        {/*    <p className="account__add__card__text">Add card</p>*/}
+                                        {/*</Link>*/}
+                                        <div className="account__form__btn__wrap">
+                                            <button
+                                                className="account__form__submit btn__bg"
+                                                onClick={handleLogout}
+                                            >
+                                                Log Out
+                                            </button>
+                                            <button
+                                                className="account__form__del btn__bg__danger"
+                                                onClick={handelDelAccount}
+                                            >
+                                                Delete account
+                                            </button>
+                                            <button
+                                                className="account__form__submit btn__bg"
+                                                onClick={() => {
+                                                    navigate('/change-password-step-1')
+                                                }}
+                                            >
+                                                Forgot password?
+                                            </button>
+                                        </div>
                                     </div>
                                 ) : null
                             }

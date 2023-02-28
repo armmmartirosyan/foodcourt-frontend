@@ -38,6 +38,12 @@ function Login() {
         remember: false
     });
 
+    useEffect(() => {
+        if (Account.getToken()) {
+            navigate('/');
+        }
+    }, []);
+
     const handleChangeValues = useCallback((key, value) => {
         setValues({
             ...values,
@@ -64,13 +70,8 @@ function Login() {
         }
 
         navigate("/");
+        window.location.reload();
     }, [values]);
-
-    useEffect(() => {
-        if (Account.getToken()) {
-            navigate('/');
-        }
-    }, []);
 
     return (
         <Wrapper
@@ -81,11 +82,19 @@ function Login() {
                 <div className="container">
                     <h1 className="login__title">Login</h1>
                     <Form
-                        handleSubmit={handleLogin}
                         handleChangeValues={handleChangeValues}
-                        values={values}
+                        handleSubmit={handleLogin}
                         drawData={drawData}
+                        values={values}
                     />
+                    <button
+                        className="login__forgot"
+                        onClick={() => {
+                            navigate('/change-password-step-1')
+                        }}
+                    >
+                        Forgot password?
+                    </button>
                 </div>
             </section>
         </Wrapper>

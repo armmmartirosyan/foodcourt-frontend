@@ -7,6 +7,8 @@ import branches from "./branches";
 import user from "./user";
 import basket from "./basket";
 import offers from "./offers";
+import paymentTypes from "./paymentTypes";
+import order from "./order";
 
 export default combineReducers({
     status,
@@ -17,4 +19,6 @@ export default combineReducers({
     user,
     basket,
     offers,
+    paymentTypes,
+    order,
 })

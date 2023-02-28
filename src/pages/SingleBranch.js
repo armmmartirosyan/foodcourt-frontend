@@ -58,7 +58,7 @@ function SingleBranch() {
                                         <p className="branch__info">{`Address\` ${branch.location}`}</p>
                                         <p className="branch__info">{`Phone\` +${branch.phoneNum}`}</p>
                                         {
-                                            branch.main ? (
+                                            branch.main === 'main' ? (
                                                 <p className="branch__info">
                                                     Main branch
                                                 </p>
