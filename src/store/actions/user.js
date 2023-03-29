@@ -36,7 +36,7 @@ export const getCurrentAccountRequest = createAsyncThunk('user/get/current', asy
         let newData = await Api.getCurrentProfile();
         data = newData.data;
     } catch (e) {
-        return rejectWithValue(e.response.data);
+        return rejectWithValue({...e.response.data, status: e.response.status});
     }
 
     return data;
@@ -103,6 +103,34 @@ export const activateUserRequest = createAsyncThunk('user/activate', async (payl
 
     try {
         let newData = await Api.activateAccount(email, token);
+        data = newData.data;
+    } catch (e) {
+        return rejectWithValue(e.response.data);
+    }
+
+    return data;
+});
+
+export const getKeyForEmailRequest = createAsyncThunk('user/get/key/email', async (payload = {}, {rejectWithValue}) => {
+    const {email} = payload;
+    let data;
+
+    try {
+        let newData = await Api.getKeyForEmail(email);
+        data = newData.data;
+    } catch (e) {
+        return rejectWithValue(e.response.data);
+    }
+
+    return data;
+});
+
+export const changeEmailRequest = createAsyncThunk('user/change/email', async (payload = {}, {rejectWithValue}) => {
+    const {...params} = payload;
+    let data;
+
+    try {
+        let newData = await Api.changeEmail(params);
         data = newData.data;
     } catch (e) {
         return rejectWithValue(e.response.data);

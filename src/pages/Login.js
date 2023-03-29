@@ -5,25 +5,27 @@ import {loginRequest} from "../store/actions/user";
 import {toast} from "react-toastify";
 import _ from "lodash";
 import Helper from "../helpers/Helper";
-import Form from "../components/Form";
 import {useNavigate} from "react-router-dom";
 import Account from "../helpers/Account";
+import {getPaymentTypesRequest} from "../store/actions/paymentTypes";
+import Form from "../components/Form";
+import Validator from "../helpers/Validator";
 
 const drawData = [
     {
-        label: 'Email',
+        label: 'Электронная почта',
         path: 'email',
     },
     {
-        label: 'Password',
+        label: 'Пароль',
         path: 'password',
     },
     {
-        label: 'Remember?',
+        label: 'Запомнить',
         path: 'remember',
     },
     {
-        label: 'Login',
+        label: 'Вход',
         path: 'submit',
     },
 ];
@@ -39,9 +41,21 @@ function Login() {
     });
 
     useEffect(() => {
-        if (Account.getToken()) {
-            navigate('/');
-        }
+        if (Account.getToken()) return navigate('/');
+
+        (async () => {
+            const data = await dispatch(getPaymentTypesRequest());
+
+            if (!_.isEmpty(data.payload) && (data.payload?.status === 'error' || data.payload?.status !== 'ok')) {
+                toast.error(_.capitalize(Helper.clearAxiosError(data.payload.message)));
+                return;
+            }
+
+            const paymentTypes = data?.payload?.paymentTypes || [];
+            const allowUse = paymentTypes.map(payment => payment.allowUse);
+
+            if(_.isEmpty(paymentTypes) || !allowUse.includes('t')) navigate('/');
+        })()
     }, []);
 
     const handleChangeValues = useCallback((key, value) => {
@@ -53,8 +67,15 @@ function Login() {
 
     const handleLogin = useCallback(async (e) => {
         e.preventDefault();
-        if (!values.email || !values.password) {
-            toast.error('Error');
+
+        const validateValues = [
+            Validator.validEmail(values.email, 'Недопустимое значение для электронной почты'),
+        ];
+
+        const invalidVal = validateValues.find((v) => v !== true);
+
+        if (invalidVal || !values.password) {
+            toast.error('Неправильный адрес электронной почты или пароль');
             return;
         }
 
@@ -69,32 +90,25 @@ function Login() {
             return;
         }
 
-        navigate("/");
-        window.location.reload();
+        window.location.href = "/";
     }, [values]);
 
     return (
         <Wrapper
             statuses={{loginStatus}}
-            pageName='Login'
+            pageName='Вход'
+            hasFooter={false}
         >
             <section className="login">
                 <div className="container">
-                    <h1 className="login__title">Login</h1>
                     <Form
+                        title='Вход'
                         handleChangeValues={handleChangeValues}
                         handleSubmit={handleLogin}
                         drawData={drawData}
                         values={values}
+                        onClickForgotPassword={() => navigate('/change-password-step-1')}
                     />
-                    <button
-                        className="login__forgot"
-                        onClick={() => {
-                            navigate('/change-password-step-1')
-                        }}
-                    >
-                        Forgot password?
-                    </button>
                 </div>
             </section>
         </Wrapper>

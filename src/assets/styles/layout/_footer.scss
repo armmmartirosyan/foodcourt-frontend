@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
-  padding: 4rem 0;
-  background-color: $blue;
+  padding: 3rem 0;
+  background-color: $lightOrange;
 
   & .container {
     display: flex;
@@ -13,41 +13,56 @@
   &__title {
     font-size: 1.4rem;
     line-height: 2.5rem;
-    color: $white;
-    font-weight: 400;
+    color: $blue;
+    font-weight: 300;
     margin-bottom: 1rem;
+    line-break: anywhere;
   }
 
   &__social {
     margin-bottom: 1rem;
     display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 
-    &__icon{
+    &__icon {
       transition: all .4s;
     }
 
     &__item {
-      border: .1rem solid $lightOrange;
+      border: 0;
       color: $white;
       margin: 1rem;
       font-size: 1.7rem;
-      width: 4rem;
-      height: 4rem;
+      width: 3rem;
+      height: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: $lightOrange;
+      padding: 0.5rem;
+      border-radius: 50%;
 
-      &:hover .footer__social__icon{
-        transform: scale(1.3);
+      &:hover .footer__social__icon {
+        transform: scale(1.2);
       }
+    }
+
+    &__icon {
+      width: 100%;
+      height: 100%;
+      transition: all .4s;
     }
   }
 
   &__copy {
     font-size: 1.5rem;
     line-height: 2.1rem;
-    color: $lightOrange;
-    font-weight: 500;
-    font-family: "Raleway", sans-serif;
+    color: $blue;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    line-break: anywhere;
   }
 }

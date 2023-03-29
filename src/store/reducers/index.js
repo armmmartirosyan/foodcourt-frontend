@@ -9,6 +9,9 @@ import basket from "./basket";
 import offers from "./offers";
 import paymentTypes from "./paymentTypes";
 import order from "./order";
+import footer from "./footer";
+import comments from "./comments";
+import about from "./about";
 
 export default combineReducers({
     status,
@@ -20,5 +23,8 @@ export default combineReducers({
     basket,
     offers,
     paymentTypes,
+    footer,
     order,
+    comments,
+    about,
 })

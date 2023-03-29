@@ -8,6 +8,7 @@ import _ from "lodash";
 import Helper from "../helpers/Helper";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Price from "../helpers/Price";
 
 function QuantityControl(props) {
     const {
@@ -39,7 +40,7 @@ function QuantityControl(props) {
             return;
         }
 
-        toast.success('Product successfully added to basket.');
+        toast.success('Товар успешно добавлен в корзину');
     }, [productId, quantity]);
 
     return (
@@ -74,7 +75,11 @@ function QuantityControl(props) {
                 </div>
             </div>
             <p className="products__card__total">
-                Total price <span className='products__card__total__price'>{`${+price * (+quantityFromOut || +quantity)}AMD`}</span>
+                Итоговая цена
+                <br/>
+                <span className='products__card__total__price'>
+                {`${Price.price(+price * (+quantityFromOut || +quantity))} RUB`}
+                </span>
             </p>
             {
                 allowAdd ? (
@@ -82,7 +87,7 @@ function QuantityControl(props) {
                         className="products__card__add btn__bg"
                         onClick={handleAddToBasket}
                     >
-                        Add
+                        Добавить
                     </button>
                 ) : null
             }

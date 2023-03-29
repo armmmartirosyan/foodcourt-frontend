@@ -6,12 +6,16 @@ import {getSlidesListRequest} from "../store/actions/slides";
 import _ from "lodash";
 import Helper from "../helpers/Helper";
 import {toast} from "react-toastify";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Banner() {
     const dispatch = useDispatch();
     const slidesList = useSelector(state => state.slides.slidesList);
 
     useEffect(() => {
+        AOS.init();
+
         (async () => {
             const data = await dispatch(getSlidesListRequest());
 
@@ -22,8 +26,13 @@ function Banner() {
     }, []);
 
     return (
-        <section className="banner">
+        <section
+            className="banner"
+            data-aos="flip-up"
+            data-aos-duration="300"
+        >
             <Carousel
+                data-aos="fade-up"
                 renderBottomCenterControls={() => null}
                 renderCenterLeftControls={({previousDisabled, previousSlide}) => (
                     <button
@@ -43,6 +52,7 @@ function Banner() {
                         {">"}
                     </button>
                 )}
+                dragThreshold={0.1}
                 wrapAround={true}
                 autoplay={true}
                 autoplayInterval={6000}

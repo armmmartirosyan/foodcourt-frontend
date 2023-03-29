@@ -41,12 +41,12 @@ class Api {
         return api.post(`/users/change-pass`, {...params});
     }
 
-    static setupIntent() {
-        return api.post(`/payment/setup-intent`);
+    static getKeyForEmail(email) {
+        return api.put(`/users/change-email-step-1`, {email});
     }
 
-    static publicKey() {
-        return api.get(`/payment/public-key`);
+    static changeEmail(params) {
+        return api.put(`/users/change-email-step-2`, params);
     }
 
     static activateAccount(email, token) {
@@ -67,8 +67,8 @@ class Api {
     }
 
     //products
-    static getProductsList({categorySlug, ...params}) {
-        return api.get(`/products/get/category/${categorySlug}`, {params: {...params}});
+    static getProductsList(params) {
+        return api.get(`/products/get`, {params});
     }
 
     static getSingleProduct(slugName) {
@@ -100,8 +100,8 @@ class Api {
     }
 
     //payment types
-    static getAllPaymentTypes() {
-        return api.get(`/payment-types`);
+    static getPaymentTypes() {
+        return api.get(`/payment-types/allowed`);
     }
 
     //orders
@@ -111,6 +111,25 @@ class Api {
 
     static getActualOrders() {
         return api.get(`/orders/user/not-received`);
+    }
+
+    //Footer
+    static getFooter() {
+        return api.get(`/footer/get`);
+    }
+
+    //About
+    static getAbout() {
+        return api.get(`/about/get`);
+    }
+
+    //Comment
+    static getComments() {
+        return api.get(`/comment/available`);
+    }
+
+    static addComment(params) {
+        return api.post(`/comment/available`, params);
     }
 }
 

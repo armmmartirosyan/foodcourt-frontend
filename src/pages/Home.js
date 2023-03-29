@@ -15,12 +15,12 @@ function Home() {
     return (
         <Wrapper
             statuses={{slidesStatus, categoriesStatus, branchesStatus, offersStatus}}
-            pageName='Home'
+            pageName='главная'
         >
             <Banner/>
+            <Offers/>
             <Categories/>
             <Branches/>
-            <Offers/>
         </Wrapper>
     );
 }

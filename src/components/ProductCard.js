@@ -2,14 +2,19 @@ import React from 'react';
 import QuantityControl from "./QuantityControl";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import Price from "../helpers/Price";
+import Helper from "../helpers/Helper";
 
 const {REACT_APP_API_URL} = process.env;
 
 function ProductCard(props) {
-    const {product} = props;
+    const {product, allowBuy = false, className} = props;
 
     return (
-        <article className="products__card">
+        <article className={`products__card ${className}`}>
+            <Link to={`/product/${product.slugName}`}  className="products__card__title">
+                <h1>{Helper.shortTxt(product.title, 30)}</h1>
+            </Link>
             <Link to={`/product/${product.slugName}`} className='products__card__link'>
                 <figure className="products__card__fig">
                     <img
@@ -18,27 +23,28 @@ function ProductCard(props) {
                         className="products__card__img"
                     />
                 </figure>
-                <div className="products__card__data">
-                    <h1 className="products__card__title">{product.title}</h1>
-                    <p className="products__card__desc">
-                        {product.description}
-                    </p>
-                    <p className="products__card__price">
-                        {`${product.price}AMD`}
-                    </p>
-                </div>
+                <p className="products__card__price">
+                    {`${Price.price(product.price)} RUB`}
+                </p>
             </Link>
-            <QuantityControl
-                productId={product.id}
-                price={product.price}
-                allowAdd={true}
-            />
+            <div className='products__card__control__container'>
+                {
+                    allowBuy ? (
+                        <QuantityControl
+                            productId={product.id}
+                            price={product.price}
+                            allowAdd={true}
+                        />
+                    ) : null
+                }
+            </div>
         </article>
     );
 }
 
 ProductCard.propTypes = {
     product: PropTypes.object.isRequired,
+    allowBuy: PropTypes.bool,
 }
 
 export default ProductCard;

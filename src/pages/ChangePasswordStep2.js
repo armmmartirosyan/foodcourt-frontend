@@ -1,32 +1,33 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import Form from "../components/Form";
 import Wrapper from "../components/Wrapper";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 import {changePasswordRequest} from "../store/actions/user";
 import _ from "lodash";
 import Helper from "../helpers/Helper";
+import Form from "../components/Form";
+import Validator from "../helpers/Validator";
 
 const drawDataChangePass = [
     {
-        label: 'Password',
+        label: 'Пароль',
         path: 'password',
     },
     {
-        label: 'Confirm password',
+        label: 'Подтвердите пароль',
         path: 'confirmPassword',
     },
     {
-        label: 'Token',
+        label: 'Ключ',
         path: 'token',
     },
     {
-        label: 'Back',
+        label: 'Назад',
         path: 'back',
     },
     {
-        label: 'Change password',
+        label: 'Изменить пароль',
         path: 'submit',
     },
 ];
@@ -57,8 +58,21 @@ function ChangePasswordStep2() {
     const handleChangePassword = useCallback(async (e) => {
         e.preventDefault();
 
+        const validateValues = [
+            Validator.validEmail(email, 'Недопустимое значение для электронной почты'),
+            Validator.validEverySymbol(values.password, 'Неверное значение пароля'),
+            Validator.validEverySymbol(values.token, 'Недопустимое значение для ключа'),
+        ];
+
+        const invalidVal = validateValues.find((v) => v !== true);
+
+        if (invalidVal) {
+            toast.error(invalidVal);
+            return;
+        }
+
         const data = await dispatch(changePasswordRequest({
-            email: email,
+            email,
             password: values.password,
             confirmPassword: values.confirmPassword,
             token: values.token
@@ -69,32 +83,32 @@ function ChangePasswordStep2() {
             return;
         }
 
-        toast.success("Password successfully changed.");
+        toast.success("Пароль изменен");
         navigate(!_.isEmpty(user) ? `/profile` : `/login`)
     }, [email, values]);
 
     const handleBack= useCallback((e) => {
         e.preventDefault();
-
         window.history.back();
     }, []);
 
     return (
         <Wrapper
             statuses={{changePassStatus}}
-            pageName='Change password step 2'
+            pageName='Сменить пароль шаг 2'
+            hasFooter={false}
         >
             {
                 email ? (
                     <section className="login">
                         <div className="container">
-                            <h1 className="login__title">Change password</h1>
                             <Form
                                 handleChangeValues={handleChangeValues}
                                 handleSubmit={handleChangePassword}
                                 drawData={drawDataChangePass}
                                 handleBack={handleBack}
                                 values={values}
+                                title='Изменить пароль'
                             />
                         </div>
                     </section>

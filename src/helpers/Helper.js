@@ -2,7 +2,7 @@ export default class Helper {
     static clearAxiosError = (str) => {
         return str.replaceAll("\"", "");
     }
-    static shortTxt = (str) => {
-        return `${str.length > 15 ? str.slice(0, 15) + '...' : str}`;
+    static shortTxt = (str, length) => {
+        return `${str.length > length ? str.slice(0, length) + '...' : str}`;
     }
 }

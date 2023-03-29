@@ -1,11 +1,12 @@
 import React from 'react';
 import QuantityControl from "./QuantityControl";
 import PropTypes from "prop-types";
+import Price from "../helpers/Price";
 
 const {REACT_APP_API_URL} = process.env;
 
 function SingleProductCard(props) {
-    const {product} = props;
+    const {product, allowBuy = false} = props;
 
     return (
         <article className="single__card">
@@ -18,20 +19,23 @@ function SingleProductCard(props) {
             </figure>
             <div className='single__card__container'>
                 <div className="single__card__data">
-                    <h1 className="single__card__title">{product.title}</h1>
                     <p className="single__card__desc">
                         {product.description}
                     </p>
                     <p className="single__card__price">
-                        {`${product.price}AMD`}
+                        {`${Price.price(product.price)} RUB`}
                     </p>
                 </div>
-                <QuantityControl
-                    productId={product.id}
-                    price={product.price}
-                    allowAdd={true}
-                    isRow={true}
-                />
+                {
+                    allowBuy ? (
+                        <QuantityControl
+                            productId={product.id}
+                            price={product.price}
+                            allowAdd={true}
+                            // isRow={true}
+                        />
+                    ) : null
+                }
             </div>
         </article>
     );
@@ -39,6 +43,7 @@ function SingleProductCard(props) {
 
 SingleProductCard.propTypes = {
     product: PropTypes.object.isRequired,
+    allowBuy: PropTypes.bool,
 }
 
 export default SingleProductCard;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import Price from "../helpers/Price";
 
 const {REACT_APP_API_URL} = process.env;
 
@@ -19,7 +20,7 @@ function OfferCard(props) {
                 </figure>
                 <div className="offers__card__box">
                     <h1 className="offers__card__title">{offer.title}</h1>
-                    <p className="offers__card__price">{`${offer.price}AMD`}</p>
+                    <p className="offers__card__price">{`${Price.price(offer.price)} RUB`}</p>
                 </div>
             </Link>
         </article>

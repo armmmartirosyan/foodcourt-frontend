@@ -1,0 +1,53 @@
+html {
+  font-size: calc(100vw / (1200 / 10));
+}
+
+.banner {
+  height: 40rem;
+
+  &__controls {
+    padding: 1rem 1.2rem 1rem 1.2rem;
+
+    &.right:hover {
+      margin-right: 0;
+      padding-left: 2.2rem;
+    }
+
+    &.left:hover {
+      margin-left: 0;
+      padding-right: 2.2rem;
+    }
+  }
+}
+
+.comment {
+  width: 35rem;
+}
+
+.offers {
+  padding: 2rem 0 0;
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+}
+
+.categories {
+  padding: 0 0 2rem;
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+}
+
+.products {
+  &__card {
+    &__control__container {
+      width: 40%;
+    }
+
+    &__link {
+      width: 60%;
+    }
+  }
+}

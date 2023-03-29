@@ -1,0 +1,48 @@
+.pages {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__btn{
+    border-color: $blue !important;
+    color: $blue !important;
+
+    &.right__btn:hover{
+      & .pages__arrow{
+        transform: translateX(1rem);
+      }
+    }
+
+    &.left__btn:hover{
+      & .pages__arrow{
+        transform: translateX(-1rem);
+      }
+    }
+
+    &:hover{
+      border-color: $lightOrange !important;
+      color: $lightOrange !important;
+    }
+  }
+
+  &__count{
+    color: #151824;
+    font-size: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    margin: 2rem 5rem;
+    transition: all .4s;
+  }
+
+  &__arrow{
+    transition: all .4s;
+    &.left__arrow{
+      margin-right: 1rem;
+    }
+
+    &.right__arrow{
+      margin-left: 1rem;
+    }
+  }
+}

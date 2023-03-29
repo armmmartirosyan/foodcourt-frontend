@@ -2,10 +2,9 @@
   padding-top: 2rem;
 
   &__title {
-    font-size: 5.6rem;
+    font-size: 4rem;
     color: $blue;
     font-weight: 400;
-    font-family: "Yesteryear", sans-serif;
     margin-bottom: 2rem;
     width: 100%;
     text-align: center;
@@ -18,6 +17,7 @@
     margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
+    border-radius: .5rem;
 
     &__container {
       display: flex;
@@ -30,6 +30,7 @@
       width: 48%;
       height: 30rem;
       overflow: hidden;
+      border-radius: .5rem;
     }
 
     &__img {
@@ -37,6 +38,7 @@
       height: 100%;
       object-fit: cover;
       transition: all .4s;
+      border-radius: .5rem;
     }
 
     &__data {
@@ -45,12 +47,13 @@
     }
 
     &__title {
-      color: $lightOrange;
+      color: $blue;
       font-size: 1.8rem;
       line-height: 1.6rem;
-      font-weight: 500;
-      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+      font-family: "Roboto", sans-serif;
       margin-bottom: 1rem;
+      line-break: anywhere;
     }
 
     &__desc {
@@ -58,12 +61,31 @@
       font-size: 1.5rem;
       line-height: 1.6rem;
       margin-bottom: 1.5rem;
+      line-break: anywhere;
     }
 
     &__price {
       color: $black;
       font-size: 1.7rem;
       line-height: 1.6rem;
+      text-align: center;
     }
   }
+}
+
+.single__suggestion{
+  &__title{
+    font-size: 3rem;
+    color: #151824;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    width: 100%;
+    line-break: anywhere;
+    text-align: center;
+  }
+}
+
+.slide__product{
+  width: 90%;
+  margin: 2rem auto;
 }

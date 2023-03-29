@@ -11,7 +11,7 @@
     height: 20rem;
     background-color: $white;
     border-radius: 1rem;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 14%);
+    box-shadow: 0 .4rem .8rem rgb(0 0 0 / 14%);
     position: absolute;
     top: 0;
     left: 0;
@@ -60,7 +60,7 @@
 
     &__dash {
       color: $blue;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: 1.8rem;
       margin: 0 1rem;
     }

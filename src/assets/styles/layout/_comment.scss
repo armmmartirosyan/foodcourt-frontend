@@ -1,0 +1,185 @@
+.comment__wrapper {
+  width: 100%;
+  background-color: $lightOrange;
+  padding-top: 2rem;
+}
+
+.comment {
+  width: 40rem;
+  height: 20rem;
+  margin: 4rem auto;
+  padding: 2rem 4rem 1rem;
+  background-color: #151824;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__text__container {
+    max-height: 75%;
+    min-height: 50%;
+  }
+
+  &__text {
+    font-size: 1.7rem;
+    line-height: 3.5rem;
+    color: $cardDarkGrey;
+    font-family: "Roboto", sans-serif;
+    line-break: anywhere;
+    height: 100%;
+    overflow-y: auto;
+    font-weight: 300;
+
+    &::-webkit-scrollbar {
+      width: .6rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #8c8e92;
+      transition: all 0.4s;
+      border-radius: .7rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #77797c;
+    }
+  }
+
+  &__name {
+    font-size: 1.7rem;
+    font-family: "Roboto", sans-serif;
+    line-break: anywhere;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 1rem 0;
+    min-height: 25%;
+    height: fit-content;
+    max-height: 50%;
+    font-weight: 300;
+  }
+
+  &__header {
+    font-size: 3rem;
+    color: $blue;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    text-align: center;
+    font-weight: 400;
+  }
+}
+
+.blockquote {
+  width: 100%;
+  background-color: $white;
+  padding: 2rem;
+  text-align: center;
+
+  & > .container {
+    max-width: 75rem;
+  }
+
+  &__description {
+    font-size: 3rem;
+    color: $blue;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    margin: 0 auto 3rem;
+    font-weight: 400;
+  }
+
+  &__form {
+    width: 100%;
+    padding: 6rem 5.7rem;
+    background-color: $blue;
+    box-shadow: 0 0 2.8rem .4rem $blue;
+    border-radius: .5rem;
+
+    &__line {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: .1rem;
+      background-color: $lightOrange;
+      transition: all .4s;
+    }
+
+    &__btn {
+      padding: 2rem 3.5rem;
+      color: #232323;
+      font-weight: 300;
+      font-family: "Roboto", sans-serif;
+      text-align: center;
+      text-transform: uppercase;
+      background-color: $lightOrange;
+      border: 0;
+      cursor: pointer;
+      transition: all .3s;
+
+      &:hover {
+        background-color: $blue;
+        color: $lightOrange;
+
+        & .message__form__btn__arrow {
+          color: $lightOrange;
+          transform: scaleX(1.2);
+          margin-left: 1.8rem;
+        }
+      }
+
+      &__arrow {
+        color: $blue;
+        margin-left: .8rem;
+        transition: all .3s;
+      }
+    }
+  }
+
+  &__area__inner {
+    width: 100%;
+    margin-bottom: 5.5rem;
+    text-align: left;
+    border-bottom: 0.1rem solid $white;
+    position: relative;
+    height: 6.5rem;
+    padding: 2rem 0 0;
+  }
+
+  &__input__label {
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    position: absolute;
+    transition: all 0.3s;
+    width: fit-content;
+    left: 0;
+    top: 2rem;
+  }
+
+  &__area {
+    width: 100%;
+    padding: 1.2rem 0;
+    color: white;
+    outline: none;
+    border: 0;
+    background-color: inherit;
+    text-align: left;
+    resize: none;
+    height: 100%;
+    transition: all .3s;
+
+    &:focus, &.filled {
+      & ~ .blockquote__form__line {
+        width: 100%;
+      }
+
+      & ~ .blockquote__input__label {
+        top: 0;
+        color: $lightOrange;
+      }
+    }
+  }
+}

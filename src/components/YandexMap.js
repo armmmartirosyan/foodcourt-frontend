@@ -5,8 +5,7 @@ import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 function YandexMap(props) {
-    const {branchesList, placemarkClick} = props;
-    const navigate = useNavigate();
+    const {branchesList} = props;
     const [center, setCenter] = useState([0, 0]);
 
     useEffect(() => {
@@ -28,14 +27,15 @@ function YandexMap(props) {
     return (
         <YMaps
             query={{
-                ns: 'use-load-option'
-            }}>
+                ns: 'use-load-option',
+            }}
+        >
             <Map
                 modules={["geocode"]}
                 width="100%"
                 height="100%"
                 state={{
-                    center: !_.isEmpty(branchesList) ? center : [40.234325, 44.497457],
+                    center: !_.isEmpty(branchesList) ? center : [55.755864, 37.617698],
                     zoom: 12,
                 }}
             >
@@ -45,12 +45,16 @@ function YandexMap(props) {
                             <Placemark
                                 key={branch.id}
                                 geometry={[branch.lat, branch.lon]}
-                                onClick={() => {
-                                    if (placemarkClick) navigate(`/branch/${branch.id}`)
-                                }}
+                                modules={['geoObject.addon.balloon']}
                                 options={{
                                     preset: 'islands#geolocationIcon',
                                     iconColor: 'red',
+                                    hasBalloon: true
+                                }}
+                                properties={{
+                                    balloonContentHeader: `<h1>${branch.title}</h1>`,
+                                    balloonContentBody: `<p>${branch.location}</p>`,
+                                    balloonContentFooter: `<p>${'+' + branch.phoneNum}</p>`,
                                 }}
                             />
                         ))
@@ -63,7 +67,6 @@ function YandexMap(props) {
 
 YandexMap.propTypes = {
     branchesList: PropTypes.array.isRequired,
-    placemarkClick: PropTypes.bool.isRequired,
 }
 
 export default YandexMap;

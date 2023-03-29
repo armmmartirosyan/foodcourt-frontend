@@ -9,7 +9,7 @@ function CategoryCard(props) {
 
     return (
         <article className="categories__card">
-            <Link to={`/menu/${category.slugName}`} className="categories__card__link">
+            <Link to={`/menu?category=${category.id}`} className="categories__card__link">
                 <figure className="categories__card__fig">
                     <img
                         src={`${REACT_APP_API_URL}/${category.imagePath}`}

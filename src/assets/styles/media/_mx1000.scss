@@ -1,0 +1,97 @@
+html {
+  font-size: calc(100vw / (1000 / 10));
+}
+
+.container {
+  width: 100%;
+}
+
+.offers {
+  padding: 2rem 2rem 0;
+
+  &__card {
+    width: calc((100% / 3) - 1.333333rem);
+    margin: 0 0 2rem;
+  }
+}
+
+.categories {
+  padding: 0 2rem 2rem;
+
+  &__card {
+    width: calc((100% / 3) - 1.333333rem);
+    margin: 0 0 2rem;
+  }
+}
+
+.banner {
+  & .container {
+    padding: 0 6rem;
+  }
+}
+
+.menu {
+  padding: 2rem;
+}
+
+.comment {
+  width: calc(100% - 4rem);
+}
+
+.header {
+  padding: 0 2rem;
+}
+
+.order__modal {
+  inset: 5%;
+  width: 90%;
+}
+
+.branches {
+  height: 60rem;
+}
+
+.payment {
+  width: calc(100% - 4rem);
+  margin: 0 auto;
+}
+
+.account {
+  &__table {
+    margin-bottom: 0;
+  }
+
+  &_form {
+    width: 100%;
+
+    &__box {
+      width: 100%;
+    }
+  }
+}
+
+.single {
+  padding: 2rem;
+}
+
+.products {
+  &__card {
+    width: calc(50% - 1.4rem);
+
+    &:nth-child(3n) {
+      margin-right: 2rem;
+    }
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+
+    &__control__container {
+      width: 40%;
+    }
+
+    &__link {
+      width: 60%;
+    }
+  }
+}

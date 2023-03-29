@@ -2,17 +2,10 @@
   width: 100%;
   padding: 2rem;
 
-  & .container{
-    display: flex;
-    flex-direction: column;
-  }
-
   &__title {
-    font-size: 5.6rem;
-    color: $blue;
+    font-size: 3rem;
+    color: $white;
     font-weight: 400;
-    font-family: "Yesteryear", sans-serif;
-    margin-bottom: 2rem;
     text-align: center;
   }
 
@@ -41,7 +34,8 @@
       margin-right: 1rem;
       color: $blue;
       padding: 1rem;
-      font-family: 'Raleway', sans-serif;
+      line-break: anywhere;
+      font-family: 'Roboto', sans-serif;
     }
 
     &__arrow {
@@ -49,7 +43,7 @@
       margin-right: 1rem;
       color: $blue;
       padding: 1rem;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Roboto', sans-serif;
       text-align: right;
     }
   }
@@ -70,13 +64,13 @@
       align-items: center;
     }
 
-    &__btn__wrap{
+    &__btn__wrap {
       width: 100%;
       display: flex;
       justify-content: center;
     }
 
-    &__submit, &__del{
+    &__submit, &__del {
       margin: 2rem;
     }
 
@@ -101,7 +95,7 @@
     }
   }
 
-  &__add__card{
+  &__add__card {
     width: 25rem;
     height: 15rem;
     display: flex;
@@ -115,13 +109,13 @@
     background-color: $white;
     border: .1rem solid $white;
 
-    &:hover{
+    &:hover {
       border: .1rem solid $blue;
       background-color: unset;
     }
 
-    &__plus{
-      font-family: 'Raleway', sans-serif;
+    &__plus {
+      font-family: 'Roboto', sans-serif;
       font-size: 2rem;
       width: 3rem;
       height: 3rem;
@@ -135,9 +129,9 @@
       transition: all .4s;
     }
 
-    &__text{
+    &__text {
       color: $blue;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: 2rem;
       transition: all .4s;
     }

@@ -5,12 +5,17 @@ import {getBranchesListRequest} from "../store/actions/branches";
 import {toast} from "react-toastify";
 import _ from "lodash";
 import Helper from "../helpers/Helper";
+import BranchesContact from "./BranchesContact";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Branches() {
     const dispatch = useDispatch();
     const branchesList = useSelector(state => state.branches.branchesList);
 
     useEffect(() => {
+        AOS.init();
+
         (async () => {
            const data = await dispatch(getBranchesListRequest());
 
@@ -21,12 +26,15 @@ function Branches() {
     }, []);
 
     return (
-        <section className="branches">
-            <h3 className="branches__title">Our branches</h3>
-            <YandexMap
-                branchesList={branchesList}
-                placemarkClick={true}
-            />
+        <section
+            className="branches"
+            data-aos="fade-up"
+            data-aos-duration="300"
+        >
+            <div className='branches__map__container'>
+                <YandexMap branchesList={branchesList}/>
+            </div>
+            <BranchesContact branches={branchesList}/>
         </section>
     );
 }

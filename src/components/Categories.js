@@ -5,12 +5,16 @@ import {getCategoriesListRequest} from "../store/actions/categories";
 import _ from 'lodash';
 import {toast} from "react-toastify";
 import Helper from "../helpers/Helper";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Categories() {
     const dispatch = useDispatch();
     const categoriesList = useSelector(state => state.categories.categoriesList);
 
     useEffect(() => {
+        AOS.init();
+
         (async () => {
             const data = await dispatch(getCategoriesListRequest());
 
@@ -21,9 +25,13 @@ function Categories() {
     }, []);
 
     return (
-        <section className="categories">
+        <section
+            className="categories"
+            data-aos="fade-up"
+            data-aos-duration="300"
+        >
             <div className="container">
-                <h3 className="categories__title">Our categories</h3>
+                <h3 className="categories__title">Категории</h3>
                 <div className="row">
                     {
                         !_.isEmpty(categoriesList) ? (

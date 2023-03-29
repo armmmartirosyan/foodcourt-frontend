@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import Helper from "../helpers/Helper";
 import classNames from "classnames";
 import EmptyPage from "../pages/EmptyPage";
+import PropTypes from "prop-types";
 
 function OrderModal(props) {
     const {showModal, onClose} = props;
@@ -31,13 +32,14 @@ function OrderModal(props) {
             onRequestClose={onClose}
             bodyOpenClassName='hidden'
         >
+            <div
+                className="order__modal__close"
+                onClick={onClose}
+            >
+                X
+            </div>
             <div className="order__modal__container">
-                <div
-                    className="order__modal__close"
-                    onClick={onClose}
-                >
-                    X
-                </div>
+                <h1 className="order__modal__header">Актуальные заказы</h1>
                 {
                     !_.isEmpty(orders) ? (
                         orders.map(order => (
@@ -45,9 +47,9 @@ function OrderModal(props) {
                                 className={classNames(
                                     'order__item',
                                     {
-                                        process: order.status === 'inProcess',
-                                        ready: order.status === 'ready',
-                                        onWay: order.status === 'onTheWay',
+                                        process: order.status === 'в процессе',
+                                        ready: order.status === 'готовый',
+                                        onWay: order.status === 'в пути',
                                     }
                                 )}
                                 key={order.id}
@@ -59,7 +61,7 @@ function OrderModal(props) {
                                     {_.capitalize(order.status.split(/(?=[A-Z])/).join(' '))}
                                 </p>
                                 <p className="order__item__text order__item__receive">
-                                    {_.capitalize(order.receiveType.split(/(?=[A-Z])/).join(' '))}
+                                    {_.capitalize(order.paymentType.typeName.split(/(?=[A-Z])/).join(' '))}
                                 </p>
                             </div>
                         ))
@@ -68,6 +70,11 @@ function OrderModal(props) {
             </div>
         </Modal>
     );
+}
+
+OrderModal.propTypes = {
+    showModal: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
 }
 
 export default OrderModal;

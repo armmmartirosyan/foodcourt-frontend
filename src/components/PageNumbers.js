@@ -1,28 +1,30 @@
 import React from 'react';
-import classNames from "classnames";
 import PropTypes from "prop-types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleRight, faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 
 function PageNumbers(props) {
     const {totalPages, currentPage, handleClickPage} = props;
 
     return (
         <div className="pages">
-            {
-                [...new Array(totalPages)].map((v, i) => (
-                    <button
-                        className={classNames(
-                            'btn__bg pages__numbers',
-                            {active: currentPage === i + 1}
-                        )}
-                        key={i}
-                        onClick={() => {
-                            handleClickPage(i + 1)
-                        }}
-                    >
-                        {i + 1}
-                    </button>
-                ))
-            }
+            <button
+                className="pages__btn btn__danger left__btn"
+                onClick={() => handleClickPage(currentPage !== 1 ? currentPage - 1 : currentPage)}
+            >
+                <FontAwesomeIcon icon={faAngleLeft} className='pages__arrow left__arrow'/>
+                Назад
+            </button>
+            <p className="pages__count">
+                {`${currentPage} из ${totalPages}`}
+            </p>
+            <button
+                className="pages__btn btn__danger right__btn"
+                onClick={() => handleClickPage(currentPage !== totalPages ? currentPage + 1 : currentPage)}
+            >
+                Следующий
+                <FontAwesomeIcon icon={faAngleRight} className='pages__arrow right__arrow'/>
+            </button>
         </div>
     );
 }

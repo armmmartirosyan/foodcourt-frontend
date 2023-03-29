@@ -7,7 +7,7 @@ import _ from "lodash";
 import {Helmet} from "react-helmet";
 
 function Wrapper(props) {
-    const {children = {}, statuses, pageName} = props;
+    const {children = {}, statuses, pageName, hasFooter = true} = props;
     const [status, setStatus] = useState('');
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function Wrapper(props) {
             </Helmet>
             <Header/>
             {children}
-            <Footer/>
+            {hasFooter && <Footer/>}
             {
                 status.includes('pending') ? (
                     <Loading/>

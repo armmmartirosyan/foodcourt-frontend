@@ -5,13 +5,18 @@ import _ from "lodash";
 import Helper from "../helpers/Helper";
 import {getOffersListRequest} from "../store/actions/offers";
 import OfferCard from "./OfferCard";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Offers() {
     const dispatch = useDispatch();
     const offersList = useSelector(state => state.offers.offersList);
     const [more, setMore] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
+        AOS.init();
+
         (async () => {
             const data = await dispatch(getOffersListRequest());
 
@@ -19,12 +24,23 @@ function Offers() {
                 toast.error(_.capitalize(Helper.clearAxiosError(data.payload.message)));
             }
         })()
+
+        function updateSize() {
+            setScreenWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', updateSize);
+        return () => window.removeEventListener('resize', updateSize);
     }, []);
 
     return (
-        <section className="offers">
+        <section
+            className="offers"
+            data-aos="fade-up"
+            data-aos-duration="300"
+        >
             <div className="container">
-                <h3 className="offers__title">Our offers</h3>
+                <h3 className="offers__title">Предложения</h3>
                 <div className="row">
                     {
                         !_.isEmpty(offersList) && more ? (
@@ -38,7 +54,7 @@ function Offers() {
                     }
                     {
                         !_.isEmpty(offersList) && !more ? (
-                            [...new Array(3)].map((v, index) => {
+                            [...new Array(screenWidth < 768 ? 2 : 3)].map((v, index) => {
                                 if (!_.isEmpty(offersList[index])) {
                                     return (
                                         <OfferCard
@@ -52,7 +68,7 @@ function Offers() {
                     }
                 </div>
                 {
-                    offersList.length >= 3 ? (
+                    offersList.length > (screenWidth < 768 ? 2 : 3) ? (
                         <button
                             className="offers__btn btn__bg"
                             onClick={() => {

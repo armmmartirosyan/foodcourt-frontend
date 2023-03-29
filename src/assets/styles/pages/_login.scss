@@ -3,108 +3,125 @@
   padding: 2rem;
 
   & .container {
-    height: 100%;
-    padding: 2rem;
-    background-color: $white;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 1rem;
   }
 
   &__title {
-    font-size: 5.6rem;
-    color: $blue;
+    font-size: 3rem;
+    color: $white;
     font-weight: 400;
-    font-family: "Yesteryear", sans-serif;
-    margin-bottom: 1rem;
     text-align: center;
   }
 
-  &__forgot{
+  &__forgot {
     font-size: 1.6rem;
-    color: $blue;
-    font-weight: 500;
-    font-family: "Raleway", sans-serif;
+    color: $white;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
     background-color: unset;
-    border: 0;
     outline: 0;
     cursor: pointer;
+    border: 0;
+    transition: all .4s;
+
+    &:hover {
+      color: $lightOrange;
+    }
   }
 
   &__form {
     width: 50rem;
     display: flex;
     align-items: center;
-    padding: 2rem;
+    padding: 2rem 2rem 0;
     flex-wrap: wrap;
     justify-content: space-around;
 
-    &__checkbox{
+    &__checkbox__container {
+      display: flex;
+      align-items: center;
+    }
+
+    &__checkbox {
       display: none;
-      &:checked{
-        & ~ .login__form__checkbox__visual > .login__form__checkbox__visual__first{
-          width: .9rem;
+
+      &:checked {
+        & ~ .login__form__checkbox__visual > .login__form__checkbox__visual__first {
+          width: .7rem;
         }
-        & ~ .login__form__checkbox__visual > .login__form__checkbox__visual__second{
-          width: 1.8rem;
-          transform: rotateZ(-40deg);
+
+        & ~ .login__form__checkbox__visual > .login__form__checkbox__visual__second {
+          width: 1.4rem;
+          transform: rotateZ(-48deg);
         }
       }
-      &__visual{
-        min-width: 2.8rem;
-        height: 2.8rem;
+
+      &__visual {
+        width: 2.4rem;
+        height: 2.4rem;
         background-color: inherit;
-        border: .2rem solid $black;
+        border: .2rem solid $white;
         border-radius: .4rem;
-        margin-right: 2rem;
         position: relative;
         cursor: pointer;
+        margin-right: 1rem;
+
         &__first {
           position: absolute;
-          top: 1.4rem;
-          left: 0.1em;
+          top: 1.2rem;
+          left: 0.2rem;
           width: 0;
           height: 0.2rem;
-          background-color: $black;
-          transform: rotateZ(40deg);
-          transition: all .4s;
+          background-color: $white;
+          transform: rotateZ(36deg);
+          transition: all 0.4s;
+          border-radius: .5rem;
         }
+
         &__second {
           position: absolute;
-          top: 1.1rem;
-          left: 0.48em;
+          top: .9rem;
+          left: 0.39em;
           width: 0;
           height: 0.2rem;
-          background-color: $black;
+          background-color: $white;
           transform: rotateZ(0deg);
           transition: all .4s;
+          border-radius: .5rem;
         }
       }
     }
 
     &__box {
-      width: 50rem;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
 
-      &.fit__content{
+      &.fit__content {
         width: fit-content;
       }
     }
 
-    &__btn__container{
+    &__btn__container {
       width: 100%;
       display: flex;
     }
 
+    &__btn__wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
     &__label {
-      font-size: 2rem;
-      color: $blue;
-      font-weight: 500;
-      font-family: "Raleway", sans-serif;
+      font-size: 1.4rem;
+      color: #fff;
+      font-weight: 300;
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      width: fit-content;
     }
 
     &__input {

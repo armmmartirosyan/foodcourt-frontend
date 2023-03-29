@@ -26,6 +26,13 @@ input[type=number] {
 }
 
 .PhoneInput {
+  &Input {
+    background-color: unset;
+    border: 0;
+    outline: 0;
+    color: $white;
+  }
+
   &Country {
     &SelectArrow {
       display: none !important;
@@ -43,21 +50,25 @@ html {
 }
 
 body {
-  background-color: $grey;
+  background-color: $lightGrayishBlue;
   font-size: 1.4rem;
   color: $black;
   font-family: $defaultFont;
 
-  &.hidden{
+  body * {
+  }
+
+  &.hidden {
     overflow: hidden;
   }
 }
 
 .wrapper {
   width: 100%;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
-  margin-top: 6.2rem;
+  margin-top: 5.6rem;
 }
 
 .container {
@@ -96,22 +107,10 @@ body {
   }
 }
 
-.pages {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-wrap: wrap;
-
-  &__numbers {
-    margin: .5rem;
-  }
-}
-
 .empty_page {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px;
+  padding: 10rem;
 }

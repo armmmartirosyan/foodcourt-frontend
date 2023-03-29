@@ -1,5 +1,4 @@
-import {createReducer} from "@reduxjs/toolkit";
-import {current} from "@reduxjs/toolkit";
+import {createReducer, current} from "@reduxjs/toolkit";
 
 const initialState = {
     basket: [],

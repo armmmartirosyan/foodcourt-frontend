@@ -1,0 +1,105 @@
+.message__form {
+  width: 100%;
+  padding: 3rem 5rem;
+  background-color: $blue;
+  box-shadow: 0 0 2.8rem .4rem $blue;
+  border-radius: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4rem;
+
+  &__line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: .1rem;
+    background-color: $lightOrange;
+    transition: all .4s;
+  }
+
+  &__btn {
+    padding: 2rem 3.5rem;
+    color: #232323;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: $lightOrange;
+    border: 0;
+    cursor: pointer;
+    transition: all .3s;
+
+    border-radius: .5rem;
+    &:hover {
+      background-color: $blue;
+      color: $lightOrange;
+
+      & .message__form__btn__arrow {
+        color: $lightOrange;
+        transform: scaleX(1.2);
+        margin-left: 1.8rem;
+      }
+    }
+
+    &__arrow {
+      color: $blue;
+      margin-left: .8rem;
+      transition: all .3s;
+    }
+  }
+}
+
+.message__area__inner {
+  width: 100%;
+  margin-bottom: 2.5rem;
+  text-align: left;
+  border-bottom: 0.1rem solid #fff;
+  position: relative;
+  height: 5.5rem;
+  padding-top: 2rem;
+}
+
+.input__label {
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  position: absolute;
+  transition: all 0.3s;
+  width: fit-content;
+  left: 0;
+  top: 2rem;
+}
+
+.message__area__container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.message__area {
+  width: 100%;
+  padding: 1.2rem 0;
+  color: white;
+  outline: none;
+  border: 0;
+  background-color: inherit;
+  text-align: left;
+  resize: none;
+  height: 100%;
+  transition: all .3s;
+
+  &:focus, &.filled {
+    & ~ .message__form__line {
+      width: 100%;
+    }
+
+    & ~ .input__label {
+      top: 0;
+      color: $lightOrange;
+    }
+  }
+}

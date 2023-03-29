@@ -1,11 +1,17 @@
 .menu {
   width: 100%;
-  padding: 2rem 0;
+  padding: 2rem 2rem;
+  position: relative;
+
+  &__bars__container {
+    width: fit-content;
+    height: fit-content;
+  }
+
   &__title {
     font-size: 5.6rem;
     color: $blue;
-    font-weight: 400;
-    font-family: "Yesteryear", sans-serif;
+    font-weight: 300;
     margin-bottom: 2rem;
     width: 100%;
     text-align: center;
@@ -17,69 +23,115 @@
     flex-wrap: wrap;
   }
 
-  .products {
-    width: calc(100% - 27rem);
+  &__form {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    padding: 1rem;
+    border: .1rem solid $blue;
+    border-radius: .5rem;
+    background-color: $white;
 
-    &__card {
+    &__search {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      cursor: pointer;
+      color: $blue;
+    }
+
+    &__input {
+      width: calc(100% - 3rem);
+      outline: 0;
+      font-family: $defaultFont;
+      font-size: 1.5rem;
+      color: $blue;
+      background-color: unset;
+      border: 0;
+    }
+  }
+}
+
+.products {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__card {
+    width: calc((100% / 3) - 1.4rem);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background-color: #fff;
+    height: 25rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+    justify-content: space-between;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    &__control__container {
+      width: 30%;
+      height: 15rem;
+    }
+
+    &__fig {
       width: 100%;
-      height: 20rem;
+      height: 15rem;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border-radius: .5rem;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all .4s;
+      border-radius: .5rem;
+    }
+
+    &__link {
+      width: 65%;
       display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: $white;
-      margin-bottom: 2rem;
+      flex-direction: column;
+      flex-wrap: wrap;
+      text-decoration: none;
 
-      &__fig {
-        width: 18rem;
-        height: 100%;
-        overflow: hidden;
+      &:hover .products__card__img {
+        transform: scale(1.1);
       }
+    }
 
-      &__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: all .4s;
+    &__title, &__title * {
+      color: $blue;
+      font-size: 1.8rem;
+      line-height: 1.6rem;
+      font-family: "Roboto", sans-serif;
+      margin-bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+
+      & h1 {
+        font-weight: 400;
       }
+    }
 
-      &__link {
-        width: 46rem;
-        height: 100%;
-        display: flex;
-        text-decoration: none;
+    &__desc {
+      color: $blue;
+      font-size: 1.5rem;
+      line-height: 1.6rem;
+      margin-bottom: 1.5rem;
+      line-break: anywhere;
+    }
 
-        &:hover .products__card__img {
-          transform: scale(1.1);
-        }
-      }
-
-      &__data {
-        width: 28rem;
-        height: 100%;
-        padding: 0 1rem;
-      }
-
-      &__title {
-        color: $lightOrange;
-        font-size: 1.8rem;
-        line-height: 1.6rem;
-        font-weight: 500;
-        font-family: "Raleway", sans-serif;
-        margin-bottom: 1rem;
-      }
-
-      &__desc {
-        color: $blue;
-        font-size: 1.5rem;
-        line-height: 1.6rem;
-        margin-bottom: 1.5rem;
-      }
-
-      &__price {
-        color: $black;
-        font-size: 1.7rem;
-        line-height: 1.6rem;
-      }
+    &__price {
+      color: $blue;
+      font-size: 1.7rem;
+      text-align: center;
     }
   }
 }

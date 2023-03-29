@@ -2,7 +2,7 @@
   width: 100%;
   padding: 2rem;
 
-  &__actual{
+  &__actual {
     width: 100%;
     margin-bottom: 2rem;
   }
@@ -15,30 +15,33 @@
 
   &__card {
     width: 44rem;
-    height: 20rem;
+    height: fit-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem 4rem 2rem 2rem;
-    background-color: $white;
+    background-color: #fff;
     margin-bottom: 2rem;
     position: relative;
+    min-height: 20rem;
+    border-radius: .5rem;
 
-    &__title{
-      color: $lightOrange;
+    &__title {
+      color: #161824;
       font-size: 1.8rem;
       line-height: 1.6rem;
-      font-weight: 500;
-      font-family: "Raleway", sans-serif;
+      font-family: "Roboto", sans-serif;
       margin-bottom: 1rem;
+      font-weight: 400;
     }
 
     &__fig {
       width: 20rem;
       height: 15rem;
+      border-radius: .5rem;
     }
 
-    &__box{
+    &__box {
       width: calc(100% - 20rem);
       height: 100%;
     }
@@ -47,6 +50,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: .5rem;
     }
 
     &__box {
@@ -54,11 +58,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
+      height: 15rem;
       width: 15rem;
     }
 
     &__del {
+      font-weight: 300;
       position: absolute;
       top: 2rem;
       right: 1rem;
@@ -84,10 +89,10 @@
   }
 
   &__total {
-    font-size: 4rem;
+    font-size: 3rem;
     color: $blue;
     font-weight: 400;
-    font-family: "Raleway", sans-serif;
+    font-family: "Roboto", sans-serif;
     margin-bottom: 3rem;
     text-align: center;
   }

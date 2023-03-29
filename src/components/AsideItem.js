@@ -1,24 +1,27 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 function AsideItem(props) {
-    const {category} = props;
+    const {category, handleClickCategory, activeCategory} = props;
 
     return (
-        <li className="aside__item">
-            <NavLink
-                to={`/menu/${category.slugName}`}
-                className="aside__link"
-            >
-                {category.name}
-            </NavLink>
+        <li
+            className={classNames(
+                'filters__link btn__bg',
+                {active: +activeCategory === +category.id}
+            )}
+            onClick={() => handleClickCategory(category.id)}
+        >
+            {category.name}
         </li>
     );
 }
 
 AsideItem.propTypes = {
+    activeCategory: PropTypes.any,
     category: PropTypes.object.isRequired,
+    handleClickCategory: PropTypes.func.isRequired,
 }
 
 export default AsideItem;

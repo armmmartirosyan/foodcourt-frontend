@@ -12,7 +12,11 @@ function AccountTableRow(props) {
             }}
         >
             <p className="account__table__label">{item.label}</p>
-            <p className="account__table__value">{user[item.path]}</p>
+            {
+                item.path === 'phoneNum' ?
+                    (<p className="account__table__value">{`+${user[item.path]}`}</p>)
+                    : (<p className="account__table__value">{user[item.path]}</p>)
+            }
             {
                 editable ? (
                     <p className="account__table__arrow">{'>'}</p>

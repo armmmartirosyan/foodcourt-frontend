@@ -9,11 +9,13 @@ import _ from "lodash";
 import Helper from "../helpers/Helper";
 import BasketCard from "../components/BasketCard";
 import Select from "react-select";
-import {getAllPaymentTypesRequest} from "../store/actions/paymentTypes";
+import {getPaymentTypesRequest} from "../store/actions/paymentTypes";
 import {getBranchesListRequest} from "../store/actions/branches";
 import {addOrderRequest} from "../store/actions/order";
 import Validator from "../helpers/Validator";
 import OrderModal from "../components/OrderModal";
+import {getCurrentAccountRequest} from "../store/actions/user";
+import Price from "../helpers/Price";
 
 function Basket() {
     const navigate = useNavigate();
@@ -33,12 +35,29 @@ function Basket() {
     });
 
     useEffect(() => {
-        if (!Account.getToken()) {
-            navigate('/login');
-            return;
-        }
+        if (!Account.getToken()) return navigate('/login');
 
         (async () => {
+            await dispatch(getCurrentAccountRequest());
+            const dataPaymentTypes = await dispatch(getPaymentTypesRequest());
+
+            if (!_.isEmpty(dataPaymentTypes.payload) && (dataPaymentTypes.payload?.status === 'error' || dataPaymentTypes.payload?.status !== 'ok')) {
+                toast.error(_.capitalize(Helper.clearAxiosError(dataPaymentTypes.payload.message)));
+                return;
+            }
+
+            const ptList = dataPaymentTypes?.payload?.paymentTypes || [];
+            const allowUse = ptList.map(payment => payment.allowUse);
+
+            if(_.isEmpty(ptList) || !allowUse.includes('t')) return navigate('/');
+
+            setPaymentTypes(ptList.map(item => {
+                return {
+                    value: item.id,
+                    label: item.typeName,
+                }
+            }))
+
             const data = await dispatch(getBasketRequest());
 
             if (!_.isEmpty(data.payload) && (data.payload?.status === 'error' || data.payload?.status !== 'ok')) {
@@ -47,21 +66,6 @@ function Basket() {
             }
 
             setBasketProducts(data.payload.basket);
-
-            const dataPaymentTypes = await dispatch(getAllPaymentTypesRequest());
-
-            if (!_.isEmpty(dataPaymentTypes.payload) && (dataPaymentTypes.payload?.status === 'error' || dataPaymentTypes.payload?.status !== 'ok')) {
-                toast.error(_.capitalize(Helper.clearAxiosError(dataPaymentTypes.payload.message)));
-                return;
-            }
-
-            const ptList = dataPaymentTypes.payload.paymentTypes;
-            setPaymentTypes(ptList.map(item => {
-                return {
-                    value: item.type,
-                    label: item.typeName,
-                }
-            }))
 
             const dataBranches = await dispatch(getBranchesListRequest());
 
@@ -129,17 +133,17 @@ function Basket() {
         });
 
         const validateValues = [
-            Validator.validString(values.note),
-            Validator.validObject(values.branch),
-            Validator.validObject(values.paymentType),
-            Validator.validArray(productsList),
-            values.paymentType.value === 'cashOnDelivery' ? Validator.validString(values.address) : true,
+            Validator.validObject(values.branch, 'Недопустимое значение для ветки'),
+            Validator.validObject(values.paymentType, 'Недопустимое значение для типа оплаты'),
+            Validator.validArray(productsList, 'Недопустимое значение для списка продуктов'),
+            values.note ? Validator.validString(values.note, 'Недопустимое значение для примечания'): true,
+            values.paymentType.value === '1' ? Validator.validString(values.address, 'Неверное значение адреса') : true,
         ];
 
         const invalidVal = validateValues.find((v) => v !== true);
 
         if (invalidVal) {
-            toast.error(`Invalid ${invalidVal}`);
+            toast.error(invalidVal);
             return;
         }
 
@@ -147,7 +151,7 @@ function Basket() {
             productsList,
             message: values.note,
             address: values.address,
-            receiveType: values.paymentType.value,
+            paymentTypeId: values.paymentType.value,
             branchId: values.branch.value,
         }));
 
@@ -157,7 +161,7 @@ function Basket() {
         }
 
         navigate('/');
-        toast.success('Order successfully added');
+        toast.success('Заказ добавлен');
     }, [basketProducts, values]);
 
     const handleChangeProductQuantity = useCallback((quantity, productId) => {
@@ -182,7 +186,7 @@ function Basket() {
     return (
         <Wrapper
             statuses={{basketStatus, paymentTypesStatus}}
-            pageName='Basket'
+            pageName='Корзина'
         >
             <section className="basket">
                 <div className="container">
@@ -190,9 +194,8 @@ function Basket() {
                         className="basket__actual btn__bg"
                         onClick={handleOpenCloseModal}
                     >
-                        Actual orders
+                        Актуальные заказы
                     </button>
-
                     {
                         !_.isEmpty(basketProducts) ? (
                             basketProducts.map(item => (
@@ -212,7 +215,7 @@ function Basket() {
                     {
                         totalPrice ? (
                             <p className="basket__total">{
-                                `Total price - ${totalPrice} AMD`}
+                                `Итоговая цена - ${Price.price(totalPrice)} RUB`}
                             </p>
                         ) : null
                     }
@@ -226,7 +229,7 @@ function Basket() {
                                     isClearable={true}
                                     isSearchable={false}
                                     options={paymentTypes}
-                                    placeholder='Payment type'
+                                    placeholder='Способ оплаты'
                                     value={values?.paymentType?.value ? values.paymentType : undefined}
                                     onChange={(type) => {
                                         handleChangeValues('paymentType', type)
@@ -243,7 +246,7 @@ function Basket() {
                                     isClearable={true}
                                     isSearchable={false}
                                     options={branches}
-                                    placeholder='Branches'
+                                    placeholder='Ветви'
                                     value={values?.branch?.value ? values.branch : undefined}
                                     onChange={(branch) => {
                                         handleChangeValues('branch', branch)
@@ -254,7 +257,7 @@ function Basket() {
                         <input
                             type="text"
                             className="payment__address"
-                            placeholder='Address'
+                            placeholder='Адрес'
                             value={values.address}
                             onChange={(e) => {
                                 handleChangeValues('address', e.target.value)
@@ -262,17 +265,16 @@ function Basket() {
                         />
                         <textarea
                             className="payment__notes"
-                            placeholder='Special notes'
+                            placeholder='Специальные примечания'
                             value={values.note}
                             onChange={(e) => {
                                 handleChangeValues('note', e.target.value)
                             }}
                         />
-                        <button className="btn__bg">Order</button>
+                        <button className="btn__bg">Заказать</button>
                     </form>
                 </div>
             </section>
-
             {
                 showModal ? (
                     <OrderModal
