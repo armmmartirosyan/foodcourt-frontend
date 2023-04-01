@@ -26,16 +26,22 @@ function Branches() {
     }, []);
 
     return (
-        <section
-            className="branches"
-            data-aos="fade-up"
-            data-aos-duration="300"
-        >
-            <div className='branches__map__container'>
-                <YandexMap branchesList={branchesList}/>
-            </div>
-            <BranchesContact branches={branchesList}/>
-        </section>
+        <>
+            {
+                !_.isEmpty(branchesList) ? (
+                    <section
+                        className="branches"
+                        data-aos="fade-up"
+                        data-aos-duration="300"
+                    >
+                        <div className='branches__map__container'>
+                            <YandexMap branchesList={branchesList}/>
+                        </div>
+                        <BranchesContact branches={branchesList}/>
+                    </section>
+                ) : null
+            }
+        </>
     );
 }
 

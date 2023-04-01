@@ -40,7 +40,7 @@ function QuantityControl(props) {
             return;
         }
 
-        toast.success('Товар успешно добавлен в корзину');
+        toast.success('Товар добавлен в корзину');
     }, [productId, quantity]);
 
     return (

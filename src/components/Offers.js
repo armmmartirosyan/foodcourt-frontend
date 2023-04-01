@@ -34,53 +34,56 @@ function Offers() {
     }, []);
 
     return (
-        <section
-            className="offers"
-            data-aos="fade-up"
-            data-aos-duration="300"
-        >
-            <div className="container">
-                <h3 className="offers__title">Предложения</h3>
-                <div className="row">
-                    {
-                        !_.isEmpty(offersList) && more ? (
-                            offersList.map(offer => (
-                                <OfferCard
-                                    key={offer.id}
-                                    offer={offer}
-                                />
-                            ))
-                        ) : null
-                    }
-                    {
-                        !_.isEmpty(offersList) && !more ? (
-                            [...new Array(screenWidth < 768 ? 2 : 3)].map((v, index) => {
-                                if (!_.isEmpty(offersList[index])) {
-                                    return (
-                                        <OfferCard
-                                            key={offersList[index].id}
-                                            offer={offersList[index]}
-                                        />
+        <>
+            {
+                !_.isEmpty(offersList) ? (
+                    <section
+                        className="offers"
+                        data-aos="fade-up"
+                        data-aos-duration="300"
+                    >
+                        <div className="container">
+                            <h3 className="offers__title">Предложения</h3>
+                            <div className="row">
+                                {
+                                    more ? (
+                                        offersList.map(offer => (
+                                            <OfferCard
+                                                key={offer.id}
+                                                offer={offer}
+                                            />
+                                        ))
+                                    ) : (
+                                        [...new Array(screenWidth < 768 ? 2 : 3)].map((v, index) => {
+                                            if (!_.isEmpty(offersList[index])) {
+                                                return (
+                                                    <OfferCard
+                                                        key={offersList[index].id}
+                                                        offer={offersList[index]}
+                                                    />
+                                                )
+                                            }
+                                        })
                                     )
                                 }
-                            })
-                        ) : null
-                    }
-                </div>
-                {
-                    offersList.length > (screenWidth < 768 ? 2 : 3) ? (
-                        <button
-                            className="offers__btn btn__bg"
-                            onClick={() => {
-                                setMore(!more)
-                            }}
-                        >
-                            {more ? 'Show less' : 'Show more'}
-                        </button>
-                    ) : null
-                }
-            </div>
-        </section>
+                            </div>
+                            {
+                                offersList.length > (screenWidth < 768 ? 2 : 3) ? (
+                                    <button
+                                        className="offers__btn btn__bg"
+                                        onClick={() => {
+                                            setMore(!more)
+                                        }}
+                                    >
+                                        {more ? 'Show less' : 'Show more'}
+                                    </button>
+                                ) : null
+                            }
+                        </div>
+                    </section>
+                ) : null
+            }
+        </>
     );
 }
 

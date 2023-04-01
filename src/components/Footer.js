@@ -22,47 +22,49 @@ function Footer() {
     }, []);
 
     return (
-        <footer className="footer">
+        <>
             {
                 !_.isEmpty(footer) ? (
-                    <div className="container">
-                        {
-                            !_.isEmpty(footer.social) ? (
-                                <div className="footer__social">
-                                    {
-                                        footer.social.map(social => (
-                                            <a
-                                                href={social.link}
-                                                key={social.id}
-                                                className="footer__social__item"
-                                                target='_blank'
-                                            >
-                                                <img src={`${REACT_APP_API_URL}/${social.imagePath}`} alt="Icon"
-                                                     className="footer__social__icon"/>
-                                            </a>
-                                        ))
-                                    }
-                                </div>
-                            ) : null
-                        }
-                        {
-                            footer.socialMediaTitle ? (
-                                <h3 className="footer__title">
-                                    {footer.socialMediaTitle}
-                                </h3>
-                            ) : null
-                        }
-                        {
-                            footer.copyright ? (
-                                <p className="footer__copy">
-                                    {footer.copyright}
-                                </p>
-                            ) : null
-                        }
-                    </div>
+                    <footer className="footer">
+                        <div className="container">
+                            {
+                                !_.isEmpty(footer.social) ? (
+                                    <div className="footer__social">
+                                        {
+                                            footer.social.map(social => (
+                                                <a
+                                                    href={social.link}
+                                                    key={social.id}
+                                                    className="footer__social__item"
+                                                    target='_blank'
+                                                >
+                                                    <img src={`${REACT_APP_API_URL}/${social.imagePath}`} alt="Icon"
+                                                         className="footer__social__icon"/>
+                                                </a>
+                                            ))
+                                        }
+                                    </div>
+                                ) : null
+                            }
+                            {
+                                footer.socialMediaTitle ? (
+                                    <h3 className="footer__title">
+                                        {footer.socialMediaTitle}
+                                    </h3>
+                                ) : null
+                            }
+                            {
+                                footer.copyright ? (
+                                    <p className="footer__copy">
+                                        {footer.copyright}
+                                    </p>
+                                ) : null
+                            }
+                        </div>
+                    </footer>
                 ) : null
             }
-        </footer>
+        </>
     );
 }
 

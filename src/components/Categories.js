@@ -25,27 +25,31 @@ function Categories() {
     }, []);
 
     return (
-        <section
-            className="categories"
-            data-aos="fade-up"
-            data-aos-duration="300"
-        >
-            <div className="container">
-                <h3 className="categories__title">Категории</h3>
-                <div className="row">
-                    {
-                        !_.isEmpty(categoriesList) ? (
-                            categoriesList.map(category => (
-                                <CategoryCard
-                                    key={category.id}
-                                    category={category}
-                                />
-                            ))
-                        ) : null
-                    }
-                </div>
-            </div>
-        </section>
+        <>
+            {
+                !_.isEmpty(categoriesList) ? (
+                    <section
+                        className="categories"
+                        data-aos="fade-up"
+                        data-aos-duration="300"
+                    >
+                        <div className="container">
+                            <h3 className="categories__title">Категории</h3>
+                            <div className="row">
+                                {
+                                    categoriesList.map(category => (
+                                        <CategoryCard
+                                            key={category.id}
+                                            category={category}
+                                        />
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </section>
+                ) : null
+            }
+        </>
     );
 }
 

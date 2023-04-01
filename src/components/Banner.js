@@ -26,50 +26,56 @@ function Banner() {
     }, []);
 
     return (
-        <section
-            className="banner"
-            data-aos="flip-up"
-            data-aos-duration="300"
-        >
-            <Carousel
-                data-aos="fade-up"
-                renderBottomCenterControls={() => null}
-                renderCenterLeftControls={({previousDisabled, previousSlide}) => (
-                    <button
-                        onClick={previousSlide}
-                        disabled={previousDisabled}
-                        className='banner__controls left'
+        <>
+            {
+                !_.isEmpty(slidesList) ? (
+                    <section
+                        className="banner"
+                        data-aos="flip-up"
+                        data-aos-duration="300"
                     >
-                        {"<"}
-                    </button>
-                )}
-                renderCenterRightControls={({nextDisabled, nextSlide}) => (
-                    <button
-                        onClick={nextSlide}
-                        disabled={nextDisabled}
-                        className='banner__controls right'
-                    >
-                        {">"}
-                    </button>
-                )}
-                dragThreshold={0.1}
-                wrapAround={true}
-                autoplay={true}
-                autoplayInterval={6000}
-                speed={800}
-            >
-                {
-                    !_.isEmpty(slidesList) ? (
-                        slidesList.map(slide => (
-                            <BannerItem
-                                key={slide.id}
-                                slide={slide}
-                            />
-                        ))
-                    ) : null
-                }
-            </Carousel>
-        </section>
+                        <Carousel
+                            data-aos="fade-up"
+                            renderBottomCenterControls={() => null}
+                            renderCenterLeftControls={({previousDisabled, previousSlide}) => (
+                                <button
+                                    onClick={previousSlide}
+                                    disabled={previousDisabled}
+                                    className='banner__controls left'
+                                >
+                                    {"<"}
+                                </button>
+                            )}
+                            renderCenterRightControls={({nextDisabled, nextSlide}) => (
+                                <button
+                                    onClick={nextSlide}
+                                    disabled={nextDisabled}
+                                    className='banner__controls right'
+                                >
+                                    {">"}
+                                </button>
+                            )}
+                            dragThreshold={0.1}
+                            wrapAround={true}
+                            autoplay={true}
+                            autoplayInterval={6000}
+                            speed={800}
+                        >
+                            {
+                                !_.isEmpty(slidesList) ? (
+                                    slidesList.map(slide => (
+                                        <BannerItem
+                                            key={slide.id}
+                                            slide={slide}
+                                        />
+                                    ))
+                                ) : null
+                            }
+                        </Carousel>
+                    </section>
+                ) : null
+            }
+        </>
     );
 }
 

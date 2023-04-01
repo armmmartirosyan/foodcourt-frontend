@@ -54,7 +54,7 @@ function Blockquote() {
             return;
         }
 
-        toast.success('Комментария успешно опубликован');
+        toast.success('Комментария опубликован');
         setComment({
             text: '',
             name: '',

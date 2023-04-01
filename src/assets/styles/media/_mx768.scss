@@ -229,12 +229,13 @@ html {
 }
 
 .Toastify__toast {
-  width: 15rem;
+  width: 25rem;
   font-size: 1rem;
+  border-radius: .5rem;
 }
 
 .Toastify__toast-container--top-right {
-  width: 15rem !important;
+  width: 25rem !important;
   font-size: 1rem;
 }
 

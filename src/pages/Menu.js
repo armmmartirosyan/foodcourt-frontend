@@ -76,7 +76,10 @@ function Menu() {
         }
 
         window.addEventListener('resize', updateSize);
-        return () => window.removeEventListener('resize', updateSize);
+        return () => {
+            window.removeEventListener('resize', updateSize);
+            document.body.classList.remove("hidden");
+        };
     }, []);
 
     const handleSearchChange = useCallback((val) => {
@@ -133,72 +136,74 @@ function Menu() {
             statuses={{productsStatus}}
             pageName='Menu'
         >
-            <section className="menu">
-                <div
-                    className={classNames(
-                        'menu__bars__wrapper',
-                        {open: openSidebar}
-                    )}
-                >
-                    <div
-                        ref={asideRef}
-                        className={classNames(
-                            'menu__bars__container',
-                            {open: openSidebar}
-                        )}
-                    >
+            {
+                !_.isEmpty(productsList) ? (
+                    <section className="menu">
+                        <div
+                            className={classNames(
+                                'menu__bars__wrapper',
+                                {open: openSidebar}
+                            )}
+                        >
+                            <div
+                                ref={asideRef}
+                                className={classNames(
+                                    'menu__bars__container',
+                                    {open: openSidebar}
+                                )}
+                            >
+                                {
+                                    openSidebar || screenWidth > 768 ? (
+                                        <MenuAside handleClickCategory={handleClickCategory}/>
+                                    ) : null
+                                }
+                                <div
+                                    className="menu__bars"
+                                    onClick={handleOpenCloseSidebar}
+                                >
+                                    <FontAwesomeIcon icon={faRightLong} className="menu__bars__icon"/>
+                                </div>
+                            </div>
+                        </div>
+                        <form className="menu__form">
+                            <label htmlFor="search" className='menu__form__search'>
+                                <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                            </label>
+                            <input
+                                autoComplete='off'
+                                type='text'
+                                className="menu__form__input"
+                                id='search'
+                                placeholder='Название продукта'
+                                value={title}
+                                onChange={(e) => {
+                                    handleSearchChange(e.target.value)
+                                }}
+                            />
+                        </form>
+                        <section className="products">
+                            {
+                                productsList.map(product => (
+                                    <ProductCard
+                                        key={product.id}
+                                        product={product}
+                                        allowBuy={allowBuy}
+                                    />
+                                ))
+                            }
+                        </section>
                         {
-                            openSidebar || screenWidth > 768 ? (
-                                <MenuAside handleClickCategory={handleClickCategory}/>
+                            totalPages > 1 ? (
+                                <PageNumbers
+                                    handleClickPage={handleClickPage}
+                                    totalPages={totalPages}
+                                    currentPage={currentPage}
+                                />
                             ) : null
                         }
-                        <div
-                            className="menu__bars"
-                            onClick={handleOpenCloseSidebar}
-                        >
-                            <FontAwesomeIcon icon={faRightLong} className="menu__bars__icon"/>
-                        </div>
-                    </div>
-                </div>
-                <form className="menu__form">
-                    <label htmlFor="search" className='menu__form__search'>
-                        <FontAwesomeIcon icon={faMagnifyingGlass}/>
-                    </label>
-                    <input
-                        autoComplete='off'
-                        type='text'
-                        className="menu__form__input"
-                        id='search'
-                        placeholder='Название продукта'
-                        value={title}
-                        onChange={(e) => {
-                            handleSearchChange(e.target.value)
-                        }}
-                    />
-                </form>
-                <section className="products">
-                    {
-                        !_.isEmpty(productsList) ? (
-                            productsList.map(product => (
-                                <ProductCard
-                                    key={product.id}
-                                    product={product}
-                                    allowBuy={allowBuy}
-                                />
-                            ))
-                        ) : <EmptyPage/>
-                    }
-                </section>
-                {
-                    totalPages > 1 ? (
-                        <PageNumbers
-                            handleClickPage={handleClickPage}
-                            totalPages={totalPages}
-                            currentPage={currentPage}
-                        />
-                    ) : null
-                }
-            </section>
+                    </section>
+                ) : <EmptyPage/>
+            }
         </Wrapper>
     );
 }
