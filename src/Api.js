@@ -75,6 +75,10 @@ class Api {
         return api.get(`/products/get/${slugName}`);
     }
 
+    static getProductsByCat(categorySlug, productId) {
+        return api.get(`/products/get/category/${categorySlug}?productId=${productId}`);
+    }
+
     //branches
     static getBranchesList() {
         return api.get(`/map/get/`);

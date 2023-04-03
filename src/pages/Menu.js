@@ -13,7 +13,7 @@ import qs from 'query-string';
 import {getPaymentTypesRequest} from "../store/actions/paymentTypes";
 import EmptyPage from "./EmptyPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMagnifyingGlass, faRightLong} from "@fortawesome/free-solid-svg-icons";
+import {faMagnifyingGlass, faBars} from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 import {useOutsideClick} from "../helpers/useOutsideClick";
 
@@ -136,74 +136,76 @@ function Menu() {
             statuses={{productsStatus}}
             pageName='Menu'
         >
-            {
-                !_.isEmpty(productsList) ? (
-                    <section className="menu">
-                        <div
-                            className={classNames(
-                                'menu__bars__wrapper',
-                                {open: openSidebar}
-                            )}
-                        >
-                            <div
-                                ref={asideRef}
-                                className={classNames(
-                                    'menu__bars__container',
-                                    {open: openSidebar}
-                                )}
-                            >
-                                {
-                                    openSidebar || screenWidth > 768 ? (
-                                        <MenuAside handleClickCategory={handleClickCategory}/>
-                                    ) : null
-                                }
-                                <div
-                                    className="menu__bars"
-                                    onClick={handleOpenCloseSidebar}
-                                >
-                                    <FontAwesomeIcon icon={faRightLong} className="menu__bars__icon"/>
-                                </div>
-                            </div>
-                        </div>
-                        <form className="menu__form">
-                            <label htmlFor="search" className='menu__form__search'>
-                                <FontAwesomeIcon icon={faMagnifyingGlass}/>
-                            </label>
-                            <input
-                                autoComplete='off'
-                                type='text'
-                                className="menu__form__input"
-                                id='search'
-                                placeholder='Название продукта'
-                                value={title}
-                                onChange={(e) => {
-                                    handleSearchChange(e.target.value)
-                                }}
-                            />
-                        </form>
-                        <section className="products">
-                            {
-                                productsList.map(product => (
-                                    <ProductCard
-                                        key={product.id}
-                                        product={product}
-                                        allowBuy={allowBuy}
-                                    />
-                                ))
-                            }
-                        </section>
+            <section className="menu">
+                <div
+                    className={classNames(
+                        'menu__bars__wrapper',
+                        {open: openSidebar}
+                    )}
+                >
+                    <div
+                        ref={asideRef}
+                        className={classNames(
+                            'menu__bars__container',
+                            {open: openSidebar}
+                        )}
+                    >
                         {
-                            totalPages > 1 ? (
-                                <PageNumbers
-                                    handleClickPage={handleClickPage}
-                                    totalPages={totalPages}
-                                    currentPage={currentPage}
-                                />
+                            openSidebar || screenWidth > 768 ? (
+                                <MenuAside handleClickCategory={handleClickCategory}/>
                             ) : null
                         }
-                    </section>
-                ) : <EmptyPage/>
-            }
+                        <div
+                            className="menu__bars"
+                            onClick={handleOpenCloseSidebar}
+                        >
+                            <FontAwesomeIcon icon={faBars} className="menu__bars__icon"/>
+                        </div>
+                    </div>
+                </div>
+                <form className="menu__form">
+                    <label htmlFor="search" className='menu__form__search'>
+                        <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                    </label>
+                    <input
+                        autoComplete='off'
+                        type='text'
+                        className="menu__form__input"
+                        id='search'
+                        placeholder='Название продукта'
+                        value={title}
+                        onChange={(e) => {
+                            handleSearchChange(e.target.value)
+                        }}
+                    />
+                </form>
+                {
+                    !_.isEmpty(productsList) ? (
+                        <>
+                            <section className="products">
+                                {
+                                    productsList.map(product => (
+                                        <ProductCard
+                                            key={product.id}
+                                            product={product}
+                                            allowBuy={allowBuy}
+                                        />
+                                    ))
+                                }
+                            </section>
+                            {
+                                totalPages > 1 ? (
+                                    <PageNumbers
+                                        handleClickPage={handleClickPage}
+                                        totalPages={totalPages}
+                                        currentPage={currentPage}
+                                    />
+                                ) : null
+                            }
+                        </>
+                    ) : <EmptyPage/>
+                }
+            </section>
         </Wrapper>
     );
 }

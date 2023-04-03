@@ -3,7 +3,7 @@ import Wrapper from "../components/Wrapper";
 import SingleProductCard from "../components/SingleProductCard";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getProductsListRequest, getSingleProductRequest} from "../store/actions/products";
+import {getProductsByCatRequest, getProductsListRequest, getSingleProductRequest} from "../store/actions/products";
 import {toast} from "react-toastify";
 import _ from "lodash";
 import Helper from "../helpers/Helper";
@@ -15,8 +15,9 @@ function Single() {
     const dispatch = useDispatch();
     const params = useParams();
     const singleProduct = useSelector(state => state.products.singleProduct);
-    const productsList = useSelector(state => state.products.productsList);
+    const productsList = useSelector(state => state.products.productsListByCat);
     const singleProductStatus = useSelector(state => state.status.productsGetSingleStatus);
+    const productsByCatStatus = useSelector(state => state.status.productsGetByCatStatus);
     const [allowBuy, setAllowBuy] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -56,9 +57,12 @@ function Single() {
 
     useEffect(() => {
         if(!_.isEmpty(singleProduct)){
-            const category = singleProduct.categories[0].id;
+            const categorySlug = singleProduct?.categories[0]?.slugName;
             (async () => {
-                const data = dispatch(getProductsListRequest({category}));
+                const data = await dispatch(getProductsByCatRequest({
+                    categorySlug,
+                    productId: singleProduct.id,
+                }));
 
                 if (!_.isEmpty(data.payload) && (data.payload?.status === 'error' || data.payload?.status !== 'ok')) {
                     toast.error(_.capitalize(Helper.clearAxiosError(data.payload.message)));
@@ -75,12 +79,11 @@ function Single() {
         }else {
             return 1;
         }
-        //screenWidth > 1000 ? 3 : screenWidth <= 535 ? 1 : 2
     }, [screenWidth, productsList]);
 
     return (
         <Wrapper
-            statuses={{singleProductStatus}}
+            statuses={{singleProductStatus, productsByCatStatus}}
             pageName={`Product ${!_.isEmpty(singleProduct) ? singleProduct.title : ''}`}
         >
             {
@@ -96,10 +99,10 @@ function Single() {
                     </section>
                 ) : null
             }
-            <section className="single__suggestion">
-                <h1 className="single__suggestion__title">Похожие продукты</h1>
-                {
-                    !_.isEmpty(productsList) ? (
+            {
+                !_.isEmpty(productsList) ? (
+                    <section className="single__suggestion">
+                        <h1 className="single__suggestion__title">Похожие продукты</h1>
                         <Carousel
                             renderBottomCenterControls={() => null}
                             renderCenterLeftControls={({previousDisabled, previousSlide}) => (
@@ -137,9 +140,9 @@ function Single() {
                                 ))
                             }
                         </Carousel>
-                    ) : null
-                }
-            </section>
+                    </section>
+                ) : null
+            }
         </Wrapper>
     );
 }

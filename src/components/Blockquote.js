@@ -54,7 +54,7 @@ function Blockquote() {
             return;
         }
 
-        toast.success('Комментария опубликован');
+        toast.success('Комментарие отправлено в модерацию');
         setComment({
             text: '',
             name: '',
@@ -103,8 +103,24 @@ function Blockquote() {
                         <h1 className="comment__header">Что люди говорят о нас</h1>
                         <Carousel
                             renderBottomCenterControls={() => null}
-                            renderCenterLeftControls={() => null}
-                            renderCenterRightControls={() => null}
+                            renderCenterLeftControls={({previousDisabled, previousSlide}) => (
+                                <button
+                                    onClick={previousSlide}
+                                    disabled={previousDisabled}
+                                    className='banner__controls left'
+                                >
+                                    {"<"}
+                                </button>
+                            )}
+                            renderCenterRightControls={({nextDisabled, nextSlide}) => (
+                                <button
+                                    onClick={nextSlide}
+                                    disabled={nextDisabled}
+                                    className='banner__controls right'
+                                >
+                                    {">"}
+                                </button>
+                            )}
                             dragThreshold={0.1}
                             wrapAround={false}
                             autoplay={false}

@@ -27,17 +27,17 @@ function ProductCard(props) {
                     {`${Price.price(product.price)} RUB`}
                 </p>
             </Link>
-            <div className='products__card__control__container'>
-                {
-                    allowBuy ? (
+            {
+                allowBuy ? (
+                    <div className='products__card__control__container'>
                         <QuantityControl
                             productId={product.id}
                             price={product.price}
                             allowAdd={true}
                         />
-                    ) : null
-                }
-            </div>
+                    </div>
+                ) : null
+            }
         </article>
     );
 }

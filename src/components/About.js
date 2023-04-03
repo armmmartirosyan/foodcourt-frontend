@@ -58,11 +58,10 @@ function AboutText() {
                                     <div className="about__slider">
                                         <Carousel
                                             data-aos="fade-up"
-                                            // renderBottomCenterControls={() => null}
                                             renderCenterLeftControls={() => null}
                                             renderCenterRightControls={() => null}
                                             dragThreshold={0.1}
-                                            wrapAround={true}
+                                            wrapAround={false}
                                             autoplay={true}
                                             autoplayInterval={6000}
                                             speed={800}

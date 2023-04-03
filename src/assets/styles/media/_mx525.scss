@@ -175,3 +175,12 @@ html {
 .menu__bars__container {
   top: 5.2rem;
 }
+
+.single__card {
+  flex-direction: column;
+  justify-content: unset;
+  align-items: center;
+}
+.single__card__fig {
+  margin-bottom: 1rem;
+}
