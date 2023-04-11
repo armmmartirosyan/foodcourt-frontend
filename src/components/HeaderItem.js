@@ -4,14 +4,18 @@ import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function HeaderItem(props) {
-    const {item} = props;
+    const {item, handleScrollTop} = props;
 
     return (
         <>
             {
                 item.show ? (
                     <div className='header__nav__item__container'>
-                        <NavLink to={item.path} className='header__nav__item'>
+                        <NavLink
+                            to={item.path}
+                            className='header__nav__item'
+                            onClick={handleScrollTop}
+                        >
                             {item.icon ? <FontAwesomeIcon icon={item.icon} className="header__nav__item__icon"/> : item.label}
                         </NavLink>
                         {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import Header from "./Header";
 import Footer from "./Footer";
 import PropTypes from "prop-types";
@@ -8,11 +8,10 @@ import {Helmet} from "react-helmet";
 
 function Wrapper(props) {
     const {children = {}, statuses, pageName, hasFooter = true} = props;
-    const [status, setStatus] = useState('');
 
-    useEffect(() => {
-        setStatus(Object.values(statuses || {}));
-    }, [statuses]);
+    const status = useMemo(() => {
+        return Object.values(statuses || {})
+    }, [statuses])
 
     useEffect(() => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});

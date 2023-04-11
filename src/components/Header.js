@@ -151,13 +151,17 @@ function Header() {
         },
     ];
 
+    const handleScrollTop = useCallback(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
+
     return (
         <header
             className='header'
             ref={headerRef}
         >
             <div className="container">
-                <Link to='/' className='header__logo'>
+                <Link to='/' className='header__logo' onClick={handleScrollTop}>
                     Шашлыков
                 </Link>
                 {
@@ -181,6 +185,7 @@ function Header() {
                                     <HeaderItem
                                         key={item.label}
                                         item={item}
+                                        handleScrollTop={handleScrollTop}
                                     />
                                 ))
                             }
